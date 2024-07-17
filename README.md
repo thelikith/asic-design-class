@@ -26,5 +26,8 @@ Output:
 
 
 
-The output remains the same when executing the code with both the gcc and riscv compilers.
+The output appears at register 100b8, and it remains the same regardless of whether the code is executed using the gcc or riscv compilers.
+
+
+
 
