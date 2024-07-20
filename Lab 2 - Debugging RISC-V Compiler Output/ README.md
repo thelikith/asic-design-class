@@ -17,6 +17,7 @@ Steps followed
    
    ![Screenshot from 2024-07-20 15-10-29](https://github.com/user-attachments/assets/6928d9f4-c50e-4c29-a4df-28be34fb50b2)
 
-6) Next, we will manually debug the instruction **addi sp, sp, -16**. This instruction decrements the stack pointer (sp) by 16. Before executing this instruction, the sp register held the value **0x0000003ffffffb50**, which is then updated to **0x0000003ffffffb40**
-   
-  ![Screenshot from 2024-07-20 15-12-20](https://github.com/user-attachments/assets/84de8f2b-8e61-49ef-a2ef-ea8ef38c26dd)
+6) Next, we will manually debug the next instruction  i.e., **addi sp, sp, -16**. This instruction decrements the stack pointer (sp) by 16. Before executing this instruction, the sp register held the value **0x0000003ffffffb50**, which is then updated to **0x0000003ffffffb40**
+
+      ![Screenshot 2024-07-20 235518](https://github.com/user-attachments/assets/5efd476a-c03c-46d7-a20d-bd528eabd4f8)
+
