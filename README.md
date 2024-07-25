@@ -1,32 +1,36 @@
-# LAB 1:  Writing a C program and comparing the outputs when compiling the code with both GCC and the RISC-V compiler
+<details>
+  <summary>LAB 1:  Writing a C program and comparing the outputs when compiling the code with both GCC and the RISC-V compiler</summary>
+   
 
-**Let's write a simple C program to count numbers from 1 to N and compile it using GCC.**
+   **Let's write a simple C program to count numbers from 1 to N and compile it using GCC.**
 
 Code to count numbers from 1 to 30:
 
 ![Screenshot 2024-07-17 134436](https://github.com/user-attachments/assets/a684f778-bf97-4889-a4ff-e30908945d56)
 
-
-
 Output:
 
 ![Screenshot from 2024-07-17 14-54-39](https://github.com/user-attachments/assets/918f5dba-6b4c-448f-9fb3-0d8d7de4a4da)
-
-
-
-
-
 
 **Now let's compile the same code using RISC-V**
 
 ![Screenshot from 2024-07-17 14-54-45](https://github.com/user-attachments/assets/63a713bf-d308-4f0a-aa7b-80d3b56fb300)
 
-
 ![Screenshot from 2024-07-17 14-54-55](https://github.com/user-attachments/assets/8f09fa57-9167-4c6c-8f94-49de255c374a)
+</details>
 
 
-# LAB 2: In our previous lab, we compiled our C code using both gcc and a RISC-V compiler. 
-![Screenshot from 2024-07-20 14-17-33](https://github.com/user-attachments/assets/290c7134-0096-4802-84de-a00084905d32)
+
+***
+
+
+
+<details>
+  <summary>LAB 2: </summary>
+     
+  In our previous lab, we compiled our C code using both gcc and a RISC-V compiler.
+   
+  ![Screenshot from 2024-07-20 14-17-33](https://github.com/user-attachments/assets/290c7134-0096-4802-84de-a00084905d32)
 
 ![Screenshot from 2024-07-20 14-20-11](https://github.com/user-attachments/assets/216bf957-e569-47a0-b448-0eeafaa4ba14)
 
@@ -49,8 +53,14 @@ Steps followed
       ![Screenshot 2024-07-20 235518](https://github.com/user-attachments/assets/5efd476a-c03c-46d7-a20d-bd528eabd4f8)
 
 
-
 The output appears at register 100b8, and it remains the same regardless of whether the code is executed using the gcc or riscv compilers.
+   
+</details>
+
+
+***
+
+
 
 
 
