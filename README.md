@@ -62,6 +62,14 @@ The output appears at register 100b8, and it remains the same regardless of whet
 
 
 
+<details>
+  <summary>LAB 3: RISC-V instruction formats and their 32-bit encoded representations</summary>
+
+</details>
+  
+
+
+
 
 
 
