@@ -83,7 +83,7 @@ The output appears at register 100b8, and it remains the same regardless of whet
        ![Screenshot 2024-07-24 191624](https://github.com/user-attachments/assets/41f5fc12-5e58-4e60-bebc-8b1cef556214)
 
   3. **S-Type (Store)**
-     + Format: opcode[6:0] | imm[4:0][11:7] | funct3[14:12] | rs1[19:15] | rs2[24:20] | imm[11:5][31:25]
+     + Format: opcode[6:0] | imm[11:7] | funct3[14:12] | rs1[19:15] | rs2[24:20] | imm[31:25]
      + Used for store instructions.
        ![Screenshot 2024-07-24 191625](https://github.com/user-attachments/assets/446beff5-399d-4426-b868-0d9c6d2ef271)
 
@@ -93,7 +93,7 @@ The output appears at register 100b8, and it remains the same regardless of whet
       ![Screenshot 2024-07-24 191626](https://github.com/user-attachments/assets/60c0073d-2e33-4fbd-a54b-01a606aeb353)
 
   5. **B-Type (Branch)**
-     + Format: opcode[6:0] | imm[11][7] | imm[4:1][11:8] | funct3[14:12] | rs1[19:15] | rs2[24:20] | imm[10:5][30:25] | imm[12][31]
+     + Format: opcode[6:0] | imm[11][7] | funct3[14:12] | rs1[19:15] | rs2[24:20] | imm[31:25]
      + Used for conditional branch instructions.
        ![Screenshot 2024-07-24 191847](https://github.com/user-attachments/assets/33c0c62f-3fe2-48bd-a1f5-18db951807cf)
 
@@ -157,8 +157,8 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
    + Opcode: 0010011
    + funct3: 000
    + Immediate: 000000000101
-   + Instruction: 000000000101 00010 000 00010 0010011
-     + 0x00510093
+   + Instruction: 000000000101	10010	000	10010	0010011
+     + 0x00590913
      
 8. SW r2, r0, 4
    + Type: S-Type
@@ -173,40 +173,40 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
     + Opcode: 0110011
     + funct3: 101
     + funct7: 0000000
-    + Instruction: 0000000 00001 00001 101 00110 0110011
-      + 0x000116b3
+    + Instruction: 0000000	01001	01001	101	10110	0110011
+      + 0x0094DB33
       
 10. BNE r0, r0, 20
     + Type: B-Type
     + Opcode: 1100011
     + funct3: 001
-    + Immediate: 0000000001010
-    + Instruction: 0000000 00000 00000 001 01010 1100011
-      + 0x01400063
+    + Immediate: 0010100
+    + Instruction: 0010100	01000	01000	001	10100	1100011
+      + 0x28841A63
       
 11. BEQ r0, r0, 15
     + Type: B-Type
     + Opcode: 1100011
     + funct3: 000
-    + Immediate: 0000000000111
-    + Instruction: 0000000 00000 00000 000 01110 1100011
-      + 0x00e00063
+    + Immediate: 0001111
+    + Instruction: 0001111	01000	01000	000	01111	1100011
+      + 0x1E8407E3
       
 12. LW r3, r1, 2
     + Type: I-Type
     + Opcode: 0000011
     + funct3: 010
     + Immediate: 000000000010
-    + Instruction: 000000000010 00001 010 00011 0000011
-      + 0x00210183
+    + Instruction: 000000000010	01001	010	10011	0000011
+      + 0x0024A983
       
 13. SLL r5, r1, r1
     + Type: R-Type
     + Opcode: 0110011
     + funct3: 001
     + funct7: 0000000
-    + Instruction: 0000000 00001 00001 001 00101 0110011
-      + 0x000115b3
+    + Instruction: 0000000	01001	01001	001	10101	0110011
+      + 0x00949AB3
 
 
 </details>
