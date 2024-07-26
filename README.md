@@ -17,6 +17,7 @@ Output:
 ![Screenshot from 2024-07-17 14-54-45](https://github.com/user-attachments/assets/63a713bf-d308-4f0a-aa7b-80d3b56fb300)
 
 ![Screenshot from 2024-07-17 14-54-55](https://github.com/user-attachments/assets/8f09fa57-9167-4c6c-8f94-49de255c374a)
+
 </details>
 
 
@@ -58,12 +59,142 @@ The output appears at register 100b8, and it remains the same regardless of whet
 </details>
 
 
+
 ***
 
 
 
 <details>
   <summary>LAB 3: RISC-V instruction formats and their 32-bit encoded representations</summary>
+
+  ## Base Instruction Formats
+
+  RISC-V has six core instruction formats: R, I, S, B, U, and J. These are all fixed 32 bits in length. Here is a brief description of each format:
+
+  There are four core instruction formats (R/I/S/U), and there are a further two variants of the instruction formats (B/J) based on the handling of immediates.
+  1. R-Type (Register)
+     + Format: opcode[6:0] | rd[11:7] | funct3[14:12] | rs1[19:15] | rs2[24:20] | funct7[31:25]
+     + Used for register-register arithmetic and logical operations.
+       ![Screenshot 2024-07-24 191623](https://github.com/user-attachments/assets/0bbb9695-b331-46e2-a75a-92a074344659)
+
+  2. I-Type (Immediate)
+     + Format: opcode[6:0] | rd[11:7] | funct3[14:12] | rs1[19:15] | imm[31:20]
+     + Used for immediate arithmetic, logical operations, and load instructions.
+       ![Screenshot 2024-07-24 191624](https://github.com/user-attachments/assets/41f5fc12-5e58-4e60-bebc-8b1cef556214)
+
+  3. S-Type (Store)
+     + Format: opcode[6:0] | imm[4:0][11:7] | funct3[14:12] | rs1[19:15] | rs2[24:20] | imm[11:5][31:25]
+     + Used for store instructions.
+       ![Screenshot 2024-07-24 191625](https://github.com/user-attachments/assets/446beff5-399d-4426-b868-0d9c6d2ef271)
+
+  4. U-Type (Upper Immediate)
+   + Format: opcode[6:0] | rd[11:7] | imm[31:12]
+   + Used for instructions that operate with a 20-bit upper immediate, such as LUI (Load Upper Immediate).
+      ![Screenshot 2024-07-24 191626](https://github.com/user-attachments/assets/60c0073d-2e33-4fbd-a54b-01a606aeb353)
+
+  5. B-Type (Branch)
+     + Format: opcode[6:0] | imm[11][7] | imm[4:1][11:8] | funct3[14:12] | rs1[19:15] | rs2[24:20] | imm[10:5][30:25] | imm[12][31]
+     + Used for conditional branch instructions.
+       ![Screenshot 2024-07-24 191847](https://github.com/user-attachments/assets/33c0c62f-3fe2-48bd-a1f5-18db951807cf)
+
+  6. J-Type (Jump)
+     + Format: opcode[6:0] | rd[11:7] | imm[19:12][12] | imm[11][20] | imm[10:1][30:21]
+     + Used for jump instructions, such as JAL (Jump And Link).
+       ![Screenshot 2024-07-24 191848](https://github.com/user-attachments/assets/7b2e93a1-1fc8-447f-95ed-1d34b82e8625)
+       
+RISC-V instruction types and the corresponding 32-bit instruction codes for the provided instructions:
+
+1. ADD r9, r10, r11
+   + Type: R-Type
+   + Opcode: 0110011
+   + funct3: 000
+   + funct7: 0000000
+   + Instruction: 0000000 01010 01011 000 01001 0110011
+     
+2. SUB r11, r9, r10
+   + Type: R-Type
+   + Opcode: 0110011
+   + funct3: 000
+   + funct7: 0100000
+   + Instruction: 0100000 01001 01010 000 01011 0110011
+     
+3. AND r10, r9, r11
+   + Type: R-Type
+   + Opcode: 0110011
+   + funct3: 111
+   + funct7: 0000000
+   + Instruction: 0000000 01001 01011 111 01010 0110011
+       
+4. OR r8, r10, r5
+   + Type: R-Type
+   + Opcode: 0110011
+   + funct3: 110
+   + funct7: 0000000
+   + Instruction: 0000000 01010 00101 110 01000 0110011
+     
+5. XOR r8, r9, r4
+   + Type: R-Type
+   + Opcode: 0110011
+   + funct3: 100
+   + funct7: 0000000
+   + Instruction: 0000000 01001 00100 100 01000 0110011
+     
+6. SLT r0, r1, r4
+   + Type: R-Type
+   + Opcode: 0110011
+   + funct3: 010
+   + funct7: 0000000
+   + Instruction: 0000000 00001 00100 010 00000 0110011
+     
+7. ADDI r2, r2, 5
+   + Type: I-Type
+   + Opcode: 0010011
+   + funct3: 000
+   + Immediate: 000000000101
+   + Instruction: 000000000101 00010 000 00010 0010011
+     
+8. SW r2, r0, 4
+   + Type: S-Type
+   + Opcode: 0100011
+   + funct3: 010
+   + Immediate: 000000000100
+   + Instruction: 0000000 00010 00000 010 00010 0100011
+     
+9. SRL r6, r1, r1
+    + Type: R-Type
+    + Opcode: 0110011
+    + funct3: 101
+    + funct7: 0000000
+    + Instruction: 0000000 00001 00001 101 00110 0110011
+      
+10. BNE r0, r0, 20
+    + Type: B-Type
+    + Opcode: 1100011
+    + funct3: 001
+    + Immediate: 0000000001010
+    + Instruction: 0000000 00000 00000 001 01010 1100011
+      
+11. BEQ r0, r0, 15
+    + Type: B-Type
+    + Opcode: 1100011
+    + funct3: 000
+    + Immediate: 0000000000111
+    + Instruction: 0000000 00000 00000 000 01110 1100011
+      
+12. LW r3, r1, 2
+    + Type: I-Type
+    + Opcode: 0000011
+    + funct3: 010
+    + Immediate: 000000000010
+    + Instruction: 000000000010 00001 010 00011 0000011
+      
+13. SLL r5, r1, r1
+    + Type: R-Type
+    + Opcode: 0110011
+    + funct3: 001
+    + funct7: 0000000
+    + Instruction: 0000000 00001 00001 001 00101 0110011
+
 
 </details>
   
