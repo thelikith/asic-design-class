@@ -110,6 +110,7 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
    + funct3: 000
    + funct7: 0000000
    + Instruction: 0000000 01010 01011 000 01001 0110011
+     + 0x00b50933
      
 2. SUB r11, r9, r10
    + Type: R-Type
@@ -117,6 +118,7 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
    + funct3: 000
    + funct7: 0100000
    + Instruction: 0100000 01001 01010 000 01011 0110011
+     + 0x40a4b433
      
 3. AND r10, r9, r11
    + Type: R-Type
@@ -124,6 +126,7 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
    + funct3: 111
    + funct7: 0000000
    + Instruction: 0000000 01001 01011 111 01010 0110011
+     + 0x0095a933
        
 4. OR r8, r10, r5
    + Type: R-Type
