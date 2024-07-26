@@ -98,7 +98,7 @@ The output appears at register 100b8, and it remains the same regardless of whet
        ![Screenshot 2024-07-24 191847](https://github.com/user-attachments/assets/33c0c62f-3fe2-48bd-a1f5-18db951807cf)
 
   6. **J-Type (Jump)**
-     + Format: opcode[6:0] | rd[11:7] | imm[19:12][12] | imm[11][20] | imm[10:1][30:21]
+     + Format: opcode[6:0] | rd[11:7] | imm[19:12] | imm[31:20]
      + Used for jump instructions, such as JAL (Jump And Link).
        ![Screenshot 2024-07-24 191848](https://github.com/user-attachments/assets/7b2e93a1-1fc8-447f-95ed-1d34b82e8625)
        
