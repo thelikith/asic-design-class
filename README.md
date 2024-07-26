@@ -72,32 +72,32 @@ The output appears at register 100b8, and it remains the same regardless of whet
   RISC-V has six core instruction formats: R, I, S, B, U, and J. These are all fixed 32 bits in length. Here is a brief description of each format:
 
   There are four core instruction formats (R/I/S/U), and there are a further two variants of the instruction formats (B/J) based on the handling of immediates.
-  1. R-Type (Register)
+  1. **R-Type (Register)**
      + Format: opcode[6:0] | rd[11:7] | funct3[14:12] | rs1[19:15] | rs2[24:20] | funct7[31:25]
      + Used for register-register arithmetic and logical operations.
        ![Screenshot 2024-07-24 191623](https://github.com/user-attachments/assets/0bbb9695-b331-46e2-a75a-92a074344659)
 
-  2. I-Type (Immediate)
+  2. **I-Type (Immediate)**
      + Format: opcode[6:0] | rd[11:7] | funct3[14:12] | rs1[19:15] | imm[31:20]
      + Used for immediate arithmetic, logical operations, and load instructions.
        ![Screenshot 2024-07-24 191624](https://github.com/user-attachments/assets/41f5fc12-5e58-4e60-bebc-8b1cef556214)
 
-  3. S-Type (Store)
+  3. **S-Type (Store)**
      + Format: opcode[6:0] | imm[4:0][11:7] | funct3[14:12] | rs1[19:15] | rs2[24:20] | imm[11:5][31:25]
      + Used for store instructions.
        ![Screenshot 2024-07-24 191625](https://github.com/user-attachments/assets/446beff5-399d-4426-b868-0d9c6d2ef271)
 
-  4. U-Type (Upper Immediate)
+  4. **U-Type (Upper Immediate)**
    + Format: opcode[6:0] | rd[11:7] | imm[31:12]
    + Used for instructions that operate with a 20-bit upper immediate, such as LUI (Load Upper Immediate).
       ![Screenshot 2024-07-24 191626](https://github.com/user-attachments/assets/60c0073d-2e33-4fbd-a54b-01a606aeb353)
 
-  5. B-Type (Branch)
+  5. **B-Type (Branch)**
      + Format: opcode[6:0] | imm[11][7] | imm[4:1][11:8] | funct3[14:12] | rs1[19:15] | rs2[24:20] | imm[10:5][30:25] | imm[12][31]
      + Used for conditional branch instructions.
        ![Screenshot 2024-07-24 191847](https://github.com/user-attachments/assets/33c0c62f-3fe2-48bd-a1f5-18db951807cf)
 
-  6. J-Type (Jump)
+  6. **J-Type (Jump)**
      + Format: opcode[6:0] | rd[11:7] | imm[19:12][12] | imm[11][20] | imm[10:1][30:21]
      + Used for jump instructions, such as JAL (Jump And Link).
        ![Screenshot 2024-07-24 191848](https://github.com/user-attachments/assets/7b2e93a1-1fc8-447f-95ed-1d34b82e8625)
