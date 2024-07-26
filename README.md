@@ -165,8 +165,8 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
    + Opcode: 0100011
    + funct3: 010
    + Immediate: 0000100
-   + Instruction: 0000100	01000	10010	010	00100	0100011
-     + 0x0x08892223
+   + Instruction: 0000100	10010	01000	010	00100	0100011
+     + 0x09242223
      
 9. SRL r6, r1, r1
     + Type: R-Type
