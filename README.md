@@ -109,45 +109,48 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
    + Opcode: 0110011
    + funct3: 000
    + funct7: 0000000
-   + Instruction: 0000000 01010 01011 000 01001 0110011
-     + 0x00b50933
+   + Instruction: 0000000	11011	11010	000	11001	0110011
+     + 0x01BD0CB3
      
 2. SUB r11, r9, r10
    + Type: R-Type
    + Opcode: 0110011
    + funct3: 000
    + funct7: 0100000
-   + Instruction: 0100000 01001 01010 000 01011 0110011
-     + 0x40a4b433
+   + Instruction: 0100000	11010	11001	000	11011	0110011
+     + 0x41AC8DB3
      
 3. AND r10, r9, r11
    + Type: R-Type
    + Opcode: 0110011
    + funct3: 111
    + funct7: 0000000
-   + Instruction: 0000000 01001 01011 111 01010 0110011
-     + 0x0095a933
+   + Instruction: 0000000	11011	11001	111	11010	0110011
+     + 0x01BCFD33
        
 4. OR r8, r10, r5
    + Type: R-Type
    + Opcode: 0110011
    + funct3: 110
    + funct7: 0000000
-   + Instruction: 0000000 01010 00101 110 01000 0110011
+   + Instruction: 0000000	10101	11010	110	11000	0110011
+     + 0x015D6C33
      
 5. XOR r8, r9, r4
    + Type: R-Type
    + Opcode: 0110011
    + funct3: 100
    + funct7: 0000000
-   + Instruction: 0000000 01001 00100 100 01000 0110011
+   + Instruction: 0000000	10100	11001	100	11000	0110011
+     + 0x014CCC33
      
 6. SLT r0, r1, r4
    + Type: R-Type
    + Opcode: 0110011
    + funct3: 010
    + funct7: 0000000
-   + Instruction: 0000000 00001 00100 010 00000 0110011
+   + Instruction: 0000000	10100	01001	010	01000	0110011
+     + 0x0144A433
      
 7. ADDI r2, r2, 5
    + Type: I-Type
@@ -155,6 +158,7 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
    + funct3: 000
    + Immediate: 000000000101
    + Instruction: 000000000101 00010 000 00010 0010011
+     + 0x00510093
      
 8. SW r2, r0, 4
    + Type: S-Type
@@ -162,6 +166,7 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
    + funct3: 010
    + Immediate: 000000000100
    + Instruction: 0000000 00010 00000 010 00010 0100011
+     0x00410223
      
 9. SRL r6, r1, r1
     + Type: R-Type
@@ -169,6 +174,7 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
     + funct3: 101
     + funct7: 0000000
     + Instruction: 0000000 00001 00001 101 00110 0110011
+      + 0x000116b3
       
 10. BNE r0, r0, 20
     + Type: B-Type
@@ -176,6 +182,7 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
     + funct3: 001
     + Immediate: 0000000001010
     + Instruction: 0000000 00000 00000 001 01010 1100011
+      + 0x01400063
       
 11. BEQ r0, r0, 15
     + Type: B-Type
@@ -183,6 +190,7 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
     + funct3: 000
     + Immediate: 0000000000111
     + Instruction: 0000000 00000 00000 000 01110 1100011
+      + 0x00e00063
       
 12. LW r3, r1, 2
     + Type: I-Type
@@ -190,6 +198,7 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
     + funct3: 010
     + Immediate: 000000000010
     + Instruction: 000000000010 00001 010 00011 0000011
+      + 0x00210183
       
 13. SLL r5, r1, r1
     + Type: R-Type
@@ -197,6 +206,7 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
     + funct3: 001
     + funct7: 0000000
     + Instruction: 0000000 00001 00001 001 00101 0110011
+      + 0x000115b3
 
 
 </details>
