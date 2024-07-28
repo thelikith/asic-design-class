@@ -185,8 +185,8 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
    + Opcode: 0100011
    + funct3: 010
    + Immediate: 000000000100
-   + Immediate[11:5]: 0000000
-   + Immediate[4:0]: 00100
+   + imm[11:5]: 0000000
+   + imm[4:0]: 00100
    + rs1: 00000
    + rd: 00010
    + Instruction: 0000000	00010	00000	010	00100	0100011
