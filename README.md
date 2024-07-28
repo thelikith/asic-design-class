@@ -250,7 +250,7 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
       + 0x001092B3
    
   | Instruction | Format |  Standard ISA Code |
-  | ----------- | ------ | ------------------ |
+  | :----------: | :------: | :------------------: |
   | ADD r9, r10, r11 | R | 0x00B504B3 |
   | SUB r11, r9, r10 | R | 0x40A485B3 |
   | AND r10, r9, r11 | R | 0x00B4F533 |
@@ -269,7 +269,7 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
 
   #### Following are the differences between standard RISCV ISA and Hardcoded ISA for the instruction set given in the reference repository:  
   
-|  **Operation**  |  **Standard RISCV ISA**  |  **Hardcoded ISA**  |  
+|  **Instructions**  |  **Standard RISCV ISA**  |  **Hardcoded ISA**  |  
 |  :----:  |  :----:  |  :----:  |  
 |  ADD R6, R2, R1  |  32'h00110333  |  32'h02208300  |  
 |  SUB R7, R1, R2  |  32'h402083b3  |  32'h02209380  |  
