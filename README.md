@@ -142,8 +142,11 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
    + Opcode: 0110011
    + funct3: 110
    + funct7: 0000000
-   + Instruction: 0000000	10101	11010	110	11000	0110011
-     + 0x015D6C33
+   + rs1: 01010
+   + rs2: 00101
+   + rd: 01000
+   + Instruction: 0000000	00101	01010	110	01000	0110011
+     + 0x00556433
      
 5. XOR r8, r9, r4
    + Type: R-Type
