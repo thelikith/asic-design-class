@@ -252,6 +252,20 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
   | ----------- | ------ | ------------------ |
   | ADD r9, r10, r11 | R | 0x00B504B3 |
   | SUB r11, r9, r10 | R | 0x40A485B3 |
+  | AND r10, r9, r11 | R | 0x00B4F533 |
+  | OR r8, r10, r5 | R | 0x00556433 |
+  | XOR r8, r9, r4 | R | 0x0044C433 |
+  | SLT r0, r1, r4 | R | 0x0040A033 |
+  | ADDI r2, r2, 5 | I | 0x00510113 |
+  | SW r2, r0, 4 | S | 0x00202223 |
+  | SRL r6, r1, r1 | R | 0x0010D333 |
+  | BNE r0, r0, 20 | B | 0x00001A63 |
+  | BEQ r0, r0, 15 | B | 0x00000F63 |
+  | LW r3, r1, 2 | I | 0x0020A183 |
+  | SLL r5, r1, r1 | R | 0x001092B3 |
+  
+  
+  
 
 
 </details>
