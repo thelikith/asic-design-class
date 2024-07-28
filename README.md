@@ -88,9 +88,9 @@ The output appears at register 100b8, and it remains the same regardless of whet
        ![Screenshot 2024-07-24 191625](https://github.com/user-attachments/assets/446beff5-399d-4426-b868-0d9c6d2ef271)
 
   4. **U-Type (Upper Immediate)**
-   + Format: opcode[6:0] | rd[11:7] | imm[31:12]
-   + Used for instructions that operate with a 20-bit upper immediate, such as LUI (Load Upper Immediate).
-      ![Screenshot 2024-07-24 191626](https://github.com/user-attachments/assets/60c0073d-2e33-4fbd-a54b-01a606aeb353)
+     + Format: opcode[6:0] | rd[11:7] | imm[31:12]
+     + Used for instructions that operate with a 20-bit upper immediate, such as LUI (Load Upper Immediate).
+        ![Screenshot 2024-07-24 191626](https://github.com/user-attachments/assets/60c0073d-2e33-4fbd-a54b-01a606aeb353)
 
   5. **B-Type (Branch)**
      + Format: opcode[6:0] | imm[11][7] | funct3[14:12] | rs1[19:15] | rs2[24:20] | imm[31:25]
