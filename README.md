@@ -67,7 +67,8 @@ The output appears at register 100b8, and it remains the same regardless of whet
 <details>
   <summary>LAB 3: RISC-V instruction formats and their 32-bit encoded representations</summary>
 
-  ## Base Instruction Formats
+  ## Task 1:
+  ### Base Instruction Formats
 
   RISC-V has six core instruction formats: R, I, S, B, U, and J. These are all fixed 32 bits in length. Here is a brief description of each format:
 
@@ -263,6 +264,10 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
   | BEQ r0, r0, 15 | B | 0x00000F63 |
   | LW r3, r1, 2 | I | 0x0020A183 |
   | SLL r5, r1, r1 | R | 0x001092B3 |
+
+  ## Task 2:
+
+  
   
   
   
