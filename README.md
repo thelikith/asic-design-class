@@ -197,8 +197,11 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
     + Opcode: 0110011
     + funct3: 101
     + funct7: 0000000
-    + Instruction: 0000000	01001	01001	101	10110	0110011
-      + 0x0094DB33
+    + rs1: 00001
+    + rs2: 00001
+    + rd: 00110
+    + Instruction: 0000000	00001	00001	101	00110	0110011
+      + 0x0010D333
       
 10. BNE r0, r0, 20
     + Type: B-Type
@@ -231,8 +234,11 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
     + Opcode: 0110011
     + funct3: 001
     + funct7: 0000000
-    + Instruction: 0000000	01001	01001	001	10101	0110011
-      + 0x00949AB3
+    + rs1: 00001
+    + rs2: 00001
+    + rd: 00101
+    + Instruction: 0000000	00001	00001	001	00101	0110011
+      + 0x001092B3
 
 
 </details>
