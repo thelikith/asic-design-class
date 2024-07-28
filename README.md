@@ -272,7 +272,7 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
   3. To run and simulate the verilog code in gtkwave, enter the following commands:
      ![Screenshot from 2024-07-28 18-34-21](https://github.com/user-attachments/assets/16c1874b-3d22-4eb4-b84c-5790071a1bff)
 
-  #### Following are the differences between standard RISCV ISA and Hardcoded ISA for the instruction set given in the reference repository:  
+  **Following are the differences between standard RISCV ISA and Hardcoded ISA for the instruction set given in the reference repository:**  
 
   The standard RISC-V ISA for the given instructions can be generated in a manner similar to the approach we used in Task 1
   
@@ -294,7 +294,9 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
   |  SRL R16, R14, R2  |  32'h0030a123  |  32'h00271803  |
   |  SLL R15, R1, R2  |  32'h002097b3  |  32'h00208783  |  
 
-  **Analysing output waveforms of above given instructions:**
+  ### Analysing output waveforms of above given instructions:
+
+  
   
   
   
