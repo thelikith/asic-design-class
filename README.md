@@ -109,7 +109,10 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
    + Opcode: 0110011
    + funct3: 000
    + funct7: 0000000
-   + Instruction: 0000000	11011	11010	000	11001	0110011
+   + rs1: 01010
+   + rs2: 01011
+   + rd: 01001
+   + Instruction: 0000000 01011 01010 000 01001 0110011
      + 0x01BD0CB3
      
 2. SUB r11, r9, r10
