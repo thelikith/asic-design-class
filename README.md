@@ -274,7 +274,11 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
 
   #### Following are the differences between standard RISCV ISA and Hardcoded ISA for the instruction set given in the reference repository:  
 
-  "Hard-coded instructions" refer to machine instructions that are explicitly defined and embedded into the code or hardware design rather than being dynamically     generated or programmed based on standard ISA specifications.
+  The standard RISC-V ISA for the given instructions can be generated in a manner similar to the approach we used in Task 1
+  
+  Hard-coded instructions: These are custom instructions where the bit patterns are manually set by the designer rather than adhering to the standard RISC-V specification. And they are designed for a specific purpose or application. Hence the 32-bits instruction that we generated will not match with the hardcoded ISA.
+  
+
   
 |  **Instructions**  |  **Standard RISCV ISA**  |  **Hardcoded ISA**  |  
 |  :----:  |  :----:  |  :----:  |  
