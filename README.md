@@ -164,8 +164,11 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
    + Opcode: 0110011
    + funct3: 010
    + funct7: 0000000
-   + Instruction: 0000000	10100	01001	010	01000	0110011
-     + 0x0144A433
+   + rs1: 00001
+   + rs2: 00100
+   + rd: 00000
+   + Instruction: 0000000	00100	00001	010	00000	0110011
+     + 0x0040A033
      
 7. ADDI r2, r2, 5
    + Type: I-Type
