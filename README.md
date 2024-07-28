@@ -175,8 +175,10 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
    + Opcode: 0010011
    + funct3: 000
    + Immediate: 000000000101
-   + Instruction: 000000000101	10010	000	10010	0010011
-     + 0x00590913
+   + rs1: 00010
+   + rd: 00010
+   + Instruction: 000000000101	00010	000	00010	0010011
+     + 0x00510113
      
 8. SW r2, r0, 4
    + Type: S-Type
@@ -215,8 +217,10 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
     + Opcode: 0000011
     + funct3: 010
     + Immediate: 000000000010
-    + Instruction: 000000000010	01001	010	10011	0000011
-      + 0x0024A983
+    + rs1: 00001
+    + rd: 00011
+    + Instruction: 000000000010	00001	010	00011	0000011
+      + 0x0020A183
       
 13. SLL r5, r1, r1
     + Type: R-Type
