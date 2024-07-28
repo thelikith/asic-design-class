@@ -207,17 +207,25 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
     + Type: B-Type
     + Opcode: 1100011
     + funct3: 001
-    + Immediate: 0010100
-    + Instruction: 0010100	01000	01000	001	10100	1100011
-      + 0x28841A63
+    + Immediate: 000000010100
+    + imm[12]: 0
+    + imm[11]: 0
+    + imm[10:5]: 000000
+    + imm[4:1]: 1010
+    + Instruction: 0 000000	00000	00000	001	1010 0	1100011
+      + 0x00001A63
       
 11. BEQ r0, r0, 15
     + Type: B-Type
     + Opcode: 1100011
     + funct3: 000
-    + Immediate: 0001111
-    + Instruction: 0001111	01000	01000	000	01111	1100011
-      + 0x1E8407E3
+    + Immediate: 000000000111
+    + imm[12]: 0
+    + imm[11]: 0
+    + imm[10:5]: 000000
+    + imm[4:1]: 0111
+    + Instruction: 0 000000	00000	00000	000	0111 0	1100011
+      + 0x00000763
       
 12. LW r3, r1, 2
     + Type: I-Type
