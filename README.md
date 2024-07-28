@@ -65,9 +65,9 @@ The output appears at register 100b8, and it remains the same regardless of whet
 
 
 <details>
-  <summary>LAB 3: RISC-V instruction formats and their 32-bit encoded representations</summary>
+  <summary>LAB 3: 32-bit RISC-V Instruction Formats: Encoding, Simulation, and Waveform Analysis </summary>
 
-  ## Task 1:
+  ## Task 1: RISC-V Instruction Formats and Hexadecimal Encoding of Specific Instructions
   ### Base Instruction Formats
 
   RISC-V has six core instruction formats: R, I, S, B, U, and J. These are all fixed 32 bits in length. Here is a brief description of each format:
@@ -265,7 +265,7 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
     | LW r3, r1, 2 | I | 0x0020A183 |
     | SLL r5, r1, r1 | R | 0x001092B3 |
 
-  ## Task 2:
+  ## Task 2: Simulation and Waveform analysis
   ### Steps to perform functional simulational
   1. Create two files in gedit as iiitb_rv32i.v and iiitb_rv32i_tb.v
   2. Copy the code from the reference github repository and paste it in your verilog and testbench files
@@ -293,6 +293,8 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
   |  LW R13, R1, 2  |  32'h0020a683  |  32'h00208681  |  
   |  SRL R16, R14, R2  |  32'h0030a123  |  32'h00271803  |
   |  SLL R15, R1, R2  |  32'h002097b3  |  32'h00208783  |  
+
+  **Analysing output waveforms of above given instructions:**
   
   
   
