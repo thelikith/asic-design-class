@@ -267,9 +267,9 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
 
   ## Task 2:
   ### Steps to perform functional simulational
-  1. Create two files by using gedit command as iiitb_rv32i.v and iiitb_rv32i_tb.v
-  2. Copy the code from the reference github repo and paste it in your verilog and testbench files
-  3. To run and simulate the verilog code in gtkwave, enter the following command:
+  1. Create two files in gedit as iiitb_rv32i.v and iiitb_rv32i_tb.v
+  2. Copy the code from the reference github repository and paste it in your verilog and testbench files
+  3. To run and simulate the verilog code in gtkwave, enter the following commands:
      ![Screenshot from 2024-07-28 18-34-21](https://github.com/user-attachments/assets/16c1874b-3d22-4eb4-b84c-5790071a1bff)
 
   #### Following are the differences between standard RISCV ISA and Hardcoded ISA for the instruction set given in the reference repository:  
@@ -280,20 +280,20 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
   
 
   
-|  **Instructions**  |  **Standard RISCV ISA**  |  **Hardcoded ISA**  |  
-|  :----:  |  :----:  |  :----:  |  
-|  ADD R6, R2, R1  |  32'h00110333  |  32'h02208300  |  
-|  SUB R7, R1, R2  |  32'h402083b3  |  32'h02209380  |  
-|  AND R8, R1, R3  |  32'h0030f433  |  32'h0230a400  |  
-|  OR R9, R2, R5  |  32'h005164b3  |  32'h02513480  |  
-|  XOR R10, R1, R4  |  32'h0040c533  |  32'h0240c500  |  
-|  SLT R1, R2, R4  |  32'h0045a0b3  |  32'h02415580  |  
-|  ADDI R12, R4, 5  |  32'h004120b3  |  32'h00520600  |  
-|  BEQ R0, R0, 15  |  32'h00000f63  |  32'h00f00002  |  
-|  SW R3, R1, 2  |  32'h0030a123  |  32'h00209181  |  
-|  LW R13, R1, 2  |  32'h0020a683  |  32'h00208681  |  
-|  SRL R16, R14, R2  |  32'h0030a123  |  32'h00271803  |
-|  SLL R15, R1, R2  |  32'h002097b3  |  32'h00208783  |  
+  |  **Instructions**  |  **Standard RISCV ISA**  |  **Hardcoded ISA**  |  
+  |  :----:  |  :----:  |  :----:  |  
+  |  ADD R6, R2, R1  |  32'h00110333  |  32'h02208300  |  
+  |  SUB R7, R1, R2  |  32'h402083b3  |  32'h02209380  |  
+  |  AND R8, R1, R3  |  32'h0030f433  |  32'h0230a400  |  
+  |  OR R9, R2, R5  |  32'h005164b3  |  32'h02513480  |  
+  |  XOR R10, R1, R4  |  32'h0040c533  |  32'h0240c500  |  
+  |  SLT R1, R2, R4  |  32'h0045a0b3  |  32'h02415580  |  
+  |  ADDI R12, R4, 5  |  32'h004120b3  |  32'h00520600  |  
+  |  BEQ R0, R0, 15  |  32'h00000f63  |  32'h00f00002  |  
+  |  SW R3, R1, 2  |  32'h0030a123  |  32'h00209181  |  
+  |  LW R13, R1, 2  |  32'h0020a683  |  32'h00208681  |  
+  |  SRL R16, R14, R2  |  32'h0030a123  |  32'h00271803  |
+  |  SLL R15, R1, R2  |  32'h002097b3  |  32'h00208783  |  
   
   
   
