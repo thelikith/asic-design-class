@@ -266,8 +266,15 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
   | SLL r5, r1, r1 | R | 0x001092B3 |
 
   ## Task 2:
+  ### Steps to perform functional simulational
+  1. Create two files by using gedit command as iiitb_rv32i.v and iiitb_rv32i_tb.v
+  2. Copy the code from the reference github repo and paste it in your verilog and testbench files
+  3. To run and simulate the verilog code in gtkwave, enter the following command:
+     ![Screenshot from 2024-07-28 18-34-21](https://github.com/user-attachments/assets/16c1874b-3d22-4eb4-b84c-5790071a1bff)
 
   #### Following are the differences between standard RISCV ISA and Hardcoded ISA for the instruction set given in the reference repository:  
+
+  "Hard-coded instructions" refer to machine instructions that are explicitly defined and embedded into the code or hardware design rather than being dynamically     generated or programmed based on standard ISA specifications.
   
 |  **Instructions**  |  **Standard RISCV ISA**  |  **Hardcoded ISA**  |  
 |  :----:  |  :----:  |  :----:  |  
