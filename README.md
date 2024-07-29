@@ -296,9 +296,61 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
 
   ### Analysing output waveforms of above given instructions:
 
+  ```
+  ADD R6, R2, R1
+  ```
+  ![IMG_0010](https://github.com/user-attachments/assets/30cb6411-4c2a-4a2b-9f43-430c505ac4e7)
+
+
+  ```
+  SUB R7, R1, R2
+  ```
+  ![IMG_0013](https://github.com/user-attachments/assets/aa230620-2c97-4abb-b0a3-96fd3995f3a8)
+
   
-  
-  
+  ```
+  AND R8, R1, R3
+  ```
+  ![IMG_0027](https://github.com/user-attachments/assets/cad8c2be-643e-431e-8579-460a29b6a59c)
+
+
+  ```
+  OR R9, R2, R5
+  ```
+  ![IMG_0016](https://github.com/user-attachments/assets/88b1edde-9b3d-4271-af0c-dac55c3300dc)
+
+
+  ```
+  XOR R10, R1, R4
+  ```
+  ![IMG_0011](https://github.com/user-attachments/assets/95486b24-2a92-4d3b-8f18-4c549ee5bf4f)
+
+
+  ```
+  SLT R1, R2, R4
+  ```
+  ![IMG_0011](https://github.com/user-attachments/assets/13e32a3b-a2e3-4105-9df3-1cf0fe0c60a4)
+
+
+  ```
+  ADDI R12, R4, 5
+  ```
+  ![IMG_0009](https://github.com/user-attachments/assets/8de296ea-9d55-4dba-9c89-738b470e5d97)
+
+
+  ```
+  BEQ R0, R0, 15
+  ```
+  ![IMG_0012](https://github.com/user-attachments/assets/a3c34a83-c1e6-4d80-bae5-f187535afc77)
+
+
+ **5-Stage instruction pipeline**
+ ![Screenshot from 2024-07-29 03-34-25](https://github.com/user-attachments/assets/f3e95dc9-f367-4cbb-ad81-0a73c286b899)
+
+
+
+
+
   
 
 
