@@ -16,6 +16,11 @@ Output:
 
 ![Screenshot from 2024-07-17 14-54-45](https://github.com/user-attachments/assets/63a713bf-d308-4f0a-aa7b-80d3b56fb300)
 
+We open the object dumpfile using the command
+```
+riscv64-unknown-elf-objdump -d -sum1toN.o | less
+```
+
 ![Screenshot from 2024-07-17 14-54-55](https://github.com/user-attachments/assets/8f09fa57-9167-4c6c-8f94-49de255c374a)
 
 </details>
@@ -55,6 +60,18 @@ Steps followed
 
 
 The output appears at register 100b8, and it remains the same regardless of whether the code is executed using the gcc or riscv compilers.
+
+### Now we will see the difference in the switches O1 and Ofast
+![Screenshot from 2024-08-12 21-08-32](https://github.com/user-attachments/assets/4da34596-2b81-47bd-8cec-640ced76a240)
+
+**assembly code with O1 switch:**
+![Screenshot from 2024-08-12 21-04-25](https://github.com/user-attachments/assets/184e2ba2-683e-4e9e-8855-6d6dcbedf306)
+
+**assembly code with Ofast switch:**
+![Screenshot from 2024-08-12 21-06-22](https://github.com/user-attachments/assets/48583f24-095d-42f7-bee7-64d438ede310)
+
+We can observe that using the **-Ofast** optimization switch results in fewer assembly instructions compared to the **-O1** switch.
+
    
 </details>
 
