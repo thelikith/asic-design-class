@@ -70,9 +70,10 @@ The output appears at register 100b8, and it remains the same regardless of whet
 **assembly code with Ofast switch:**
 ![Screenshot from 2024-08-12 21-06-22](https://github.com/user-attachments/assets/48583f24-095d-42f7-bee7-64d438ede310)
 
-We can observe that using the **-Ofast** optimization switch results in fewer assembly instructions compared to the **-O1** switch.
++ Number of instructions when compiled with O1 switch = 14
++ Number of instructions when compiled with Ofast switch = 11
++ We can observe that using the **-Ofast** optimization switch results in fewer assembly instructions compared to the **-O1** switch.
 
-   
 </details>
 
 
