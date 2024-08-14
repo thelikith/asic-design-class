@@ -364,15 +364,153 @@ RISC-V instruction types and the corresponding 32-bit instruction codes for the 
  **5-Stage instruction pipeline**
  ![Screenshot from 2024-07-29 03-34-25](https://github.com/user-attachments/assets/f3e95dc9-f367-4cbb-ad81-0a73c286b899)
 
+</details>
+
+
+***
 
 
 
-
+<details>
+  <summary>LAB 4:  Selecting and Compiling a C Application with GCC and RISC-V GCC compiler</summary>
   
+  ## Application Name: Logic Gate Simulator
+  ### Overview: Simulates the behavior of basic logic gates (AND, OR, NOT, etc.) with truth tables and custom inputs
+  **Logic Gate Simulator** is a C-based application designed to simulate the behavior of basic logic gates, including AND, OR, NOT, XOR, NAND, NOR. The application allows users to input custom values, generate truth tables
+
+  **Code:**
+  ```c
+#include <stdio.h>
+
+// Function prototypes for logic gates
+int AND(int a, int b);
+int OR(int a, int b);
+int NOT(int a);
+int XOR(int a, int b);
+int NAND(int a, int b);
+int NOR(int a, int b);
+
+// Function to print the truth table for two-input gates
+void print_truth_table_two_inputs(int (*gate)(int, int), const char *gate_name);
+
+// Function to print the truth table for NOT gate
+void print_truth_table_not();
+
+// Main function
+int main() {
+    int choice;
+    
+    printf("Logic Gate Simulator\n");
+    printf("1. AND Gate\n");
+    printf("2. OR Gate\n");
+    printf("3. NOT Gate\n");
+    printf("4. XOR Gate\n");
+    printf("5. NAND Gate\n");
+    printf("6. NOR Gate\n");
+    printf("Enter your choice (1-6): ");
+    scanf("%d", &choice);
+
+    switch(choice) {
+        case 1:
+            print_truth_table_two_inputs(AND, "AND");
+            break;
+        case 2:
+            print_truth_table_two_inputs(OR, "OR");
+            break;
+        case 3:
+            print_truth_table_not();
+            break;
+        case 4:
+            print_truth_table_two_inputs(XOR, "XOR");
+            break;
+        case 5:
+            print_truth_table_two_inputs(NAND, "NAND");
+            break;
+        case 6:
+            print_truth_table_two_inputs(NOR, "NOR");
+            break;
+        default:
+            printf("Invalid choice!\n");
+    }
+
+    return 0;
+}
+
+// AND gate function
+int AND(int a, int b) {
+    return a & b;
+}
+
+// OR gate function
+int OR(int a, int b) {
+    return a | b;
+}
+
+// NOT gate function
+int NOT(int a) {
+    return !a;
+}
+
+// XOR gate function
+int XOR(int a, int b) {
+    return a ^ b;
+}
+
+// NAND gate function
+int NAND(int a, int b) {
+    return !(a & b);
+}
+
+// NOR gate function
+int NOR(int a, int b) {
+    return !(a | b);
+}
+
+// Function to print the truth table for two-input gates
+void print_truth_table_two_inputs(int (*gate)(int, int), const char *gate_name) {
+    printf("\nTruth Table for %s Gate\n", gate_name);
+    printf("A B | Output\n");
+    printf("------------\n");
+
+    for(int a = 0; a <= 1; a++) {
+        for(int b = 0; b <= 1; b++) {
+            printf("%d %d |   %d\n", a, b, gate(a, b));
+        }
+    }
+}
+
+// Function to print the truth table for NOT gate
+void print_truth_table_not() {
+    printf("\nTruth Table for NOT Gate\n");
+    printf("A | Output\n");
+    printf("---------\n");
+
+    for(int a = 0; a <= 1; a++) {
+        printf("%d |   %d\n", a, NOT(a));
+    }
+}
+```
+
+**Compiling the application using the GCC compiler:**
+
+![Screenshot from 2024-08-14 20-17-59](https://github.com/user-attachments/assets/5aa3c864-798a-468e-a0ff-294b7c522f0b)
+
+
+**Compiling the application using the RISC-V GCC compiler**
+
+![Screenshot from 2024-08-14 20-18-56](https://github.com/user-attachments/assets/6264cabc-ee3d-4e84-8906-1fc4b3fb76a3)
+
+**Comparing the output of the application when compiled with the standard GCC compiler versus the RISC-V GCC compiler**
+
+![Screenshot from 2024-08-14 20-19-49](https://github.com/user-attachments/assets/31633f1a-5c3c-480a-97f6-85663384a5d2)
+
+
+
+
+
 
 
 </details>
-  
 
 
 
