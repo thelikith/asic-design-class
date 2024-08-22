@@ -58,7 +58,6 @@ Steps followed
 
       ![Screenshot 2024-07-20 235518](https://github.com/user-attachments/assets/5efd476a-c03c-46d7-a20d-bd528eabd4f8)
 
-
 The output appears at register 100b8, and it remains the same regardless of whether the code is executed using the gcc or riscv compilers.
 
 ### Now we will see the difference in the switches O1 and Ofast
@@ -506,15 +505,236 @@ void print_truth_table_not() {
 ![Screenshot from 2024-08-14 20-19-49](https://github.com/user-attachments/assets/31633f1a-5c3c-480a-97f6-85663384a5d2)
 
 
-
-
-
-
-
 </details>
 
 
+***
+
+
+<details>
+  <summary>LAB 5:  </summary>
+  
+**TL-Verilog** is a higher-level version of Verilog used for modeling and designing digital systems in a more abstract way. Instead of focusing on the detailed wiring and gates, TL-Verilog lets you describe how a system behaves without getting into the specifics of its implementation. This abstraction is useful for system-level design and simulation.
+
+**Makerchip** is an online platform where you can design, simulate, and test digital systems using HDLs like TL-Verilog, Verilog, and VHDL. It offers a user-friendly environment for creating and experimenting with digital designs, making it great for learning, teaching, and prototyping. 
+  
+  <details>
+    <summary> Digital Logic with TL-Verilog and Makerchip </summary>
+Logic gates are essential parts of digital circuits. They perform basic operations on binary data (0s and 1s) and are key to how computers and other digital devices handle information. There are different types of logic gates, each with a specific function
+    
+  ![Screenshot (219)](https://github.com/user-attachments/assets/37dc2892-d103-4f6c-9e1c-d6bcde83cfd1)
+  ![Screenshot (220)](https://github.com/user-attachments/assets/042668ea-4aea-4698-9850-4742b14bc3a1)
+    
+  ### Combinational Logic in TL-Verilog and Makerchip
+  
+  Combinational logic involves creating circuits that process binary inputs to produce binary outputs based on set rules. These circuits operate without memory or feedback, meaning their outputs depend only on the current inputs and not on past states.
+  
+  **1) Inverter on Makerchip**
+     ![Screenshot (209)](https://github.com/user-attachments/assets/73a65273-f58c-47cb-b0cd-08f38ab66bcf)     
+  **2) AND gate on Makerchip**
+     ![Screenshot (210)](https://github.com/user-attachments/assets/2aef5ed9-377a-43ef-b8c6-f9525a4be4e6)
+  **3) OR gate on Makerchip**
+     ![Screenshot (212)](https://github.com/user-attachments/assets/afef06d7-b4cd-4ab9-a014-12672f220c2a)
+  **4) EXOR gate on Makerchip**
+     ![Screenshot (213)](https://github.com/user-attachments/assets/ce40afa4-ddec-4918-bfa8-67600cb20964)
+  **5) Vectors on Makerchip**
+     ![Screenshot (214)](https://github.com/user-attachments/assets/3c5081a4-eddd-4544-b6c7-3280bf8cd100)
+  **6) Mux on Makerchip**
+     ![Screenshot (215)](https://github.com/user-attachments/assets/3a3b02c7-be90-41f5-b290-6b03b845eb67)
+     ![Screenshot (216)](https://github.com/user-attachments/assets/9b687af5-a899-4641-9be3-7d33632490c0)
+  **7) Calculator on Makerchip**
+  ```c
+\TLV
+   $reset = *reset;
+   
+   $val1[31:0] = $rand1[3:0];
+   $val2[31:0] = $rand2[3:0];
+   $sum[31:0]  = $val1[31:0] + $val2[31:0];
+   $diff[31:0] = $val1[31:0] - $val2[31:0];
+   $prod[31:0] = $val1[31:0] * $val2[31:0];
+   $quot[31:0] = $val1[31:0] / $val2[31:0];
+   
+   $out[31:0] = $op[1] ? ($op[0] ? $quot[31:0] : $prod[31:0]) : ($op[0] ? $diff[31:0] : $add[31:0]); 
+  ```
+
+  ![Screenshot (218)](https://github.com/user-attachments/assets/d97dcefb-635b-4c5d-91b5-6338297be285)
+
+
+  ### Sequential Logic in TL-Verilog and Makerchip
+  Sequential logic is a type of digital circuit where the output depends on both the current inputs and the circuit's previous states. Unlike combinational logic, which only uses current inputs to produce outputs, sequential logic includes memory elements to keep track of past information and influence the current output.
+  
+**1) Sequential calculator on Makerchip**
+![Screenshot (222)](https://github.com/user-attachments/assets/9d23930c-9b12-4529-8c0f-14c59fd0da43)
+
+
+  ```c
+\TLV
+   |calc
+      @1
+         $clk_lik = *clk;
+         $reset = *reset;
+         $val1[31:0] = >>1$result[31:0];
+         $val2[31:0] = $rand2[3:0];
+         $result[31:0] = $reset ? 32'b0 : ($sel[1:0] == 2'b00)
+                         ? ($val1[31:0] + $val2[31:0]) : ($sel[1:0] == 2'b01)
+                         ? ($val1[31:0] - $val2[31:0]) : ($sel[1:0] == 2'b10)
+                         ? ($val1[31:0] * $val2[31:0]) : ($sel[1:0] == 2'b11)
+                         ? ($val2[31:0] != 0 ? ($val1[31:0] / $val2[31:0]) : 32'bx) :  32'b0;
+ ```
+
+  ![Screenshot (221)](https://github.com/user-attachments/assets/10f9e7de-4be1-4d33-9103-3adacdd45b3c)
+
+
+  ### Pipelined Logic
+  
+Pipelining is a key feature in TL-Verilog that simplifies coding and helps reduce bugs compared to SystemVerilog. In TL-Verilog, you can easily implement pipelining with less code. For example, in the provided repo, you can see how pipelining is used to calculate the Pythagorean theorem. In TL-Verilog, you define the pipeline stages using |calc and align them with @1, @2, and so on.
 
 
 
+**2-Cycle Calculator in Pipeline**
+
+![Screenshot (226)](https://github.com/user-attachments/assets/d4c28f9f-d80b-4618-99fe-d1c3f7e7626e)
+
+
+```c
+\TLV
+   |calc
+      @1
+         $reset = *reset;
+         $clk_lik = *clk;
+         $val1[31:0] = >>2$out[31:0];
+         $val2[31:0] = $rand2[3:0];
+         $op[1:0] = $rand3[1:0];
+         $sum[31:0] = $val1[31:0] + $val2[31:0];
+         $diff[31:0] = $val1[31:0] - $val2[31:0];
+         $prod[31:0] = $val1[31:0] * $val2[31:0];
+         $quot[31:0] = $val1[31:0] / $val2[31:0];
+         
+         $num = $reset ? 0 : >>1$num+1;
+      @2   
+         $out[31:0] = ($reset|!$num) ? 32'b0 : (($op[1:0]==2'b00) ? $sum :
+                                       ($op[1:0]==2'b01) ? $diff :
+                                          ($op[1:0]==2'b10) ? $prod : $quot);
+   // Assert these to end simulation (before Makerchip cycle limit).
+   *passed = *cyc_cnt > 40;
+   *failed = 1'b0;
+```
+![Screenshot (227)](https://github.com/user-attachments/assets/4ba5d5df-4b1b-4767-aac9-d618c337afca)
+
+
+  ### Validity
+  **1) 2-Cycle Calculator with Validity**
+  
+  ![Screenshot (233)](https://github.com/user-attachments/assets/eb5d65f4-1688-4bba-b263-9a4078c43be6)
+
+  ```c
+\TLV
+    |calc
+      @0
+         $reset = *reset;
+         $clk_lik = *clk;
+         
+      @1
+         $val1 [31:0] = >>2$out;
+         $val2 [31:0] = $rand2[3:0];
+         
+         $valid = $reset ? 1'b0 : >>1$valid + 1'b1 ;
+         $valid_or_reset = $valid || $reset;
+         
+      ?$vaild_or_reset
+         @1   
+            $sum [31:0] = $val1 + $val2;
+            $diff[31:0] = $val1 - $val2;
+            $prod[31:0] = $val1 * $val2;
+            $quot[31:0] = $val1 / $val2;
+            
+         @2   
+            $mem[31:0] = $reset ? 32'b0 :
+                         ($op[2:0] == 3'b101) ? $val1 : >>2$mem ;
+            
+            $out [31:0] = $reset ? 32'b0 :
+                          ($op[2:0] == 3'b000) ? $sum :
+                          ($op[2:0] == 3'b001) ? $diff :
+                          ($op[2:0] == 3'b010) ? $prod :
+                          ($op[2:0] == 3'b011) ? $quot :
+                          ($op[2:0] == 3'b100) ? >>2$mem : >>2$out ;
+  ```
+![Screenshot (234)](https://github.com/user-attachments/assets/1b1824fc-60f2-42d6-99fb-ae8fc9a00eae)
+
+
+  **2) Calculator with single value memory**
+  
+![Screenshot (236)](https://github.com/user-attachments/assets/4f59abf9-15e6-48b5-b579-4924577dfc63)
+```c
+\TLV
+    |calc
+      @0
+         $reset = *reset;
+         $clk_lik = *clk;
+         
+      @1
+         $val1 [31:0] = >>2$out;
+         $val2 [31:0] = $rand2[3:0];
+         
+         $valid = $reset ? 1'b0 : >>1$valid + 1'b1 ;
+         $valid_or_reset = $valid || $reset;
+         
+      ?$vaild_or_reset
+         @1   
+            $sum [31:0] = $val1 + $val2;
+            $diff[31:0] = $val1 - $val2;
+            $prod[31:0] = $val1 * $val2;
+            $quot[31:0] = $val1 / $val2;
+            
+         @2   
+            $mem[31:0] = $reset ? 32'b0 :
+                         ($op[2:0] == 3'b101) ? $val1 : >>2$mem ;
+            
+            $out [31:0] = $reset ? 32'b0 :
+                          ($op[2:0] == 3'b000) ? $sum :
+                          ($op[2:0] == 3'b001) ? $diff :
+                          ($op[2:0] == 3'b010) ? $prod :
+                          ($op[2:0] == 3'b011) ? $quot :
+                          ($op[2:0] == 3'b100) ? >>2$mem : >>2$out ;
+```
+![Screenshot (237)](https://github.com/user-attachments/assets/9195b7f4-1db3-4afe-ab27-482f80ef35f4)
+
+  </details>
+
+  
+  <details>
+    <summary> Basic RISC-V CPU micro-architecture </summary>
+    
+  ### Introduction to Simple RISC-V micro-architecture 
+  RISC-V block diagram A block diagram of a RISC-V processor provides a high-level overview of its major components and how they are interconnected. Here's a block diagram of a typical RISC-V processor:
+
+  + **Decoder:** The decoder translates binary instructions into control signals that direct the processor's functional units on how to execute them.
+  + **Instruction Memory:** Instruction memory stores and supplies the machine instructions needed by the processor for execution.
+  + **ALU (Arithmetic Logic Unit):** The ALU performs arithmetic and logical operations on data, such as addition and comparisons.
+  + **ALU Control Unit:** The ALU control unit provides signals to configure the ALU for the specific operation required by the current instruction.
+  + **Register File:** The register file contains general-purpose registers that temporarily store data during instruction execution.
+  + **Data Memory:** Data memory holds data for read and write operations and is used in load and store instructions.
+
+  ### Fetch and Decode
+  
+  
+
+  ### RISC-V Control logic
+
+  </details>
+
+
+  <details>
+    <summary> Complete Pipelined RISC-V CPU micro-architecture </summary>
+    
+  ### Pipelining the CPU
+
+  ### Solutions to Pipeline Hazards
+
+  ### Load/Store Instructions and Completing RISC-V CPU
+
+  </details>
+  
+
+</details>
 
