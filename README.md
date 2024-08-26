@@ -1035,20 +1035,30 @@ Here are the steps required to convert TLV code to Verilog:
 
 ### Installation of necessary tools
 Run the following commands in Ubuntu
-1. Install required packages
+
+**1. Install required packages**
 ```
  $ sudo apt install make python python3 python3-pip git iverilog gtkwave docker.io
  $ sudo chmod 666 /var/run/docker.sock
  $ cd ~
  $ pip3 install pyyaml click sandpiper-saas
 ```
-2. Clone the repository
+alternative commands
+```
+ $ sudo apt install make python python3 python3-pip git iverilog gtkwave
+ $ sudo apt-get install python3-venv
+ $ python3 -m venv .venv
+ $ source ~/.venv/bin/activate
+ $ pip3 install pyyaml click sandpiper-saas
+```
+
+**2. Clone the repository**
 ```
  $ cd
  $ git clone https://github.com/manili/VSDBabySoC.git
 ```
 
-3. Conversion of TL-Verilog code into Standard Verilog Code
+**3. Conversion of TL-Verilog code into Standard Verilog Code**
 - __[TL-Verilog Code](https://github.com/thelikith/asic-design-class/blob/main/Codes/likith_riscv.tlv)__
 ```
  $ cd VSDBabySoC
@@ -1057,7 +1067,7 @@ Run the following commands in Ubuntu
 ![Screenshot from 2024-08-27 00-39-01](https://github.com/user-attachments/assets/ff870aea-bdbb-48ea-b108-a57936ce323d)
 
 
-4. Run the Verilog code using iverilog
+**4. Run the Verilog code using iverilog**
   - __[Converted verilog code](https://github.com/thelikith/asic-design-class/blob/main/Codes/likith_riscv.v)__
   - __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/likith_riscv_tb.v)__
 ```
@@ -1071,7 +1081,7 @@ Run the following commands in Ubuntu
  $ iverilog -o output/likith_riscv.out -g2005-sv src/module/likith_riscv_tb.v -I src/include -I src/module
 ```
 
-5. Viewing waveforms in gtkwave
+**5. Viewing waveforms in gtkwave**
 ```
  $ cd output
  $ ./likith_riscv.out
