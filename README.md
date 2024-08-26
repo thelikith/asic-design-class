@@ -1054,7 +1054,6 @@ Run the following commands in Ubuntu
 ```
  $ cd VSDBabySoC
  $ sandpiper-saas -i ./src/module/*.tlv -o likith_riscv.v --bestsv --noline -p verilog --outdir ./src/module/
- $ cd VSDBabySoC
 ```
 
 4. Run the Verilog code using iverilog
