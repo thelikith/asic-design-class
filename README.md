@@ -1055,6 +1055,8 @@ Run the following commands in Ubuntu
  $ cd VSDBabySoC
  $ sandpiper-saas -i ./src/module/*.tlv -o likith_riscv.v --bestsv --noline -p verilog --outdir ./src/module/
 ```
+![Screenshot from 2024-08-27 00-39-01](https://github.com/user-attachments/assets/ff870aea-bdbb-48ea-b108-a57936ce323d)
+
 
 4. Run the Verilog code using iverilog
   - __[Converted verilog code](https://github.com/thelikith/asic-design-class/blob/main/Codes/likith_riscv.v)__
