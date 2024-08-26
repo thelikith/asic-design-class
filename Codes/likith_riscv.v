@@ -256,7 +256,7 @@
       //       be sure to avoid having unassigned signals (which you might be using for random inputs)
       //       other than those specifically expected in the labs. You'll get strange errors for these.
 
-      `BOGUS_USE(CPU_is_beq_a5 CPU_is_bne_a5 CPU_is_blt_a5 CPU_is_bge_a5 CPU_is_bltu_a5 CPU_is_bgeu_a5 CPU_clk_lik_a5)
+         `BOGUS_USE(CPU_is_beq_a5 CPU_is_bne_a5 CPU_is_blt_a5 CPU_is_bge_a5 CPU_is_bltu_a5 CPU_is_bgeu_a5 CPU_clk_lik_a5)
          `BOGUS_USE(CPU_is_sb_a5 CPU_is_sh_a5 CPU_is_sw_a5)
    // Assert these to end simulation (before Makerchip cycle limit).
    /*SV_plus*/

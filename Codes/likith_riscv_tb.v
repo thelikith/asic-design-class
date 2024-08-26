@@ -6,21 +6,21 @@
 module likith_riscv_tb;
 
   // Testbench signals
-  reg clk;
+  reg clk_lik; 
   reg reset;
   wire [9:0] out;
 
   // Instantiate the RV_CPU module
   RV_CPU dut (
-    .clk(clk),
+    .clk(clk_lik), 
     .reset(reset),
     .out(out)
   );
 
   // Clock generation
   initial begin
-    clk = 0;
-    forever #5 clk = ~clk;  // Adjust clock period as necessary
+    clk_lik = 0; 
+    forever #5 clk_lik = ~clk_lik; 
   end
 
   // Test sequence
