@@ -7,7 +7,7 @@
    m4_ifelse_block(M4_MAKERCHIP, 1, ['
    // Makerchip module interface.
    m4_makerchip_module
-   wire clk_arn = clk;
+   wire clk_lik = clk;
    logic [9:0] out;
    assign passed = cyc_cnt > 300;
    '], ['
@@ -17,7 +17,7 @@
       input clk,
       input reset
    );
-   wire clk_arn = clk;
+   wire clk_lik = clk;
    '])
 \TLV
 
@@ -256,11 +256,11 @@
       //       be sure to avoid having unassigned signals (which you might be using for random inputs)
       //       other than those specifically expected in the labs. You'll get strange errors for these.
 
-         `BOGUS_USE($is_beq $is_bne $is_blt $is_bge $is_bltu $is_bgeu $clk_arn)
+         `BOGUS_USE($is_beq $is_bne $is_blt $is_bge $is_bltu $is_bgeu $clk_lik)
          `BOGUS_USE($is_sb $is_sh $is_sw)
    // Assert these to end simulation (before Makerchip cycle limit).
    \SV_plus
-      always @ (posedge clk_arn) begin
+      always @ (posedge clk_lik) begin
          *out = |cpu/xreg[14]>>5$value;                
       end
    
