@@ -1046,7 +1046,6 @@ Run the following commands in Ubuntu
 ```
  $ cd
  $ git clone https://github.com/manili/VSDBabySoC.git
- $ cd VSDBabySoC
 ```
 
 3. Conversion of TL-Verilog code into Standard Verilog Code
@@ -1062,6 +1061,7 @@ Run the following commands in Ubuntu
   - __[Converted verilog code](https://github.com/thelikith/asic-design-class/blob/main/Codes/likith_riscv.v)__
   - __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/likith_riscv_tb.v)__
 ```
+ $ make pre_synth_sim 
  $ iverilog -o output/likith_riscv.out src/module/likith_riscv_tb.v -I src/include -I src/module
 ```
  If you encounter the following error, use this command:
@@ -1078,18 +1078,12 @@ Run the following commands in Ubuntu
  $ gtkwave likith_riscv.vcd
 ```
 **GTKWave:**
-![Screenshot from 2024-08-27 00-41-06](https://github.com/user-attachments/assets/0b74968f-a1ff-41c1-8b14-721a9b3af061)
-
+![Screenshot from 2024-08-27 02-51-21](https://github.com/user-attachments/assets/4dd9e539-5b01-4dea-b3c4-89417677bdf7)
 
 **Makerchip:**
 ![Screenshot 2024-08-22 132714](https://github.com/user-attachments/assets/03bef1df-f7fa-47b8-a61e-51d67abe599f)
 
 We successfully converted TLV code to Verilog using the Sandpiper-SaaS library and verified it by comparing waveforms from the MakerChip platform with those from the Verilog testbench in GTKWave
-
-
-   
-
-
 
 
 </details>
