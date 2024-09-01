@@ -1097,5 +1097,42 @@ alternative commands
 
 We successfully converted TLV code to Verilog using the Sandpiper-SaaS library and verified it by comparing waveforms from the MakerChip platform with those from the Verilog testbench in GTKWave
 
+</details>
+
+
+***
+
+
+<details>
+  <summary>LAB 7:  BabySoc Pre-synthesis simulation using iverilog GTKwave</summary>
+
+Converting a digital output from a CPU into an analog signal using a DAC (Digital-to-Analog Converter) and PLL (Phase-Locked Loop)
+
+**1. Clone the repository**
+```
+ $ cd
+ $ git clone https://github.com/Subhasis-Sahu/BabySoC_Simulation
+```
+
+```
+$ iverilog -o ./pre_synth_sim.out -DPRE_SYNTH_SIM src/module/testbench.v -I src/include -I src/module/
+$ ./pre_synth_sim.out
+$ gtkwave pre_synth_sim.vcd
+```
+
+
+
+![Screenshot from 2024-09-01 20-29-55](https://github.com/user-attachments/assets/15ec732a-4d8b-4ba3-bee4-89fe1646a923)
+
+#### PLL input and DAC Output
+![Screenshot from 2024-09-01 20-28-29](https://github.com/user-attachments/assets/32aaca0f-8fac-47d8-af91-941817052c76)
+![Screenshot from 2024-09-01 20-27-49](https://github.com/user-attachments/assets/10cce90c-48ff-4197-92d5-57e23ad9c4f8)
+  
+
+  
+
 
 </details>
+
+
+
