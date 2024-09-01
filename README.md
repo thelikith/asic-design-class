@@ -1059,7 +1059,7 @@ alternative commands
 ```
 
 **3. Conversion of TL-Verilog code into Standard Verilog Code**
-- __[TL-Verilog Code](https://github.com/thelikith/asic-design-class/blob/main/Codes/likith_riscv.tlv)__
+- __[TL-Verilog Code](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%206/likith_riscv.tlv)__
   Place the TL-Verilog code provided into the VSDBabySoC/src/module directory
 ```
  $ cd VSDBabySoC
@@ -1069,8 +1069,8 @@ alternative commands
 
 
 **4. Run the Verilog code using iverilog**
-  - __[Converted verilog code](https://github.com/thelikith/asic-design-class/blob/main/Codes/likith_riscv.v)__
-  - __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/likith_riscv_tb.v)__
+  - __[Converted verilog code](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%206/likith_riscv.v)__
+  - __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%206/likith_riscv_tb.v)__
     Place the test bench provided into the VSDBabySoC/src/module directory
 ```
  $ make pre_synth_sim 
