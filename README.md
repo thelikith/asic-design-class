@@ -1127,12 +1127,175 @@ $ gtkwave pre_synth_sim.vcd
 #### PLL input and DAC Output
 ![Screenshot from 2024-09-01 20-28-29](https://github.com/user-attachments/assets/32aaca0f-8fac-47d8-af91-941817052c76)
 ![Screenshot from 2024-09-01 20-27-49](https://github.com/user-attachments/assets/10cce90c-48ff-4197-92d5-57e23ad9c4f8)
-  
-
-  
-
 
 </details>
+
+
+
+
+
+***
+
+
+
+
+
+<details>
+  <summary>LAB 8: Verilog RTL Design Techniques Utilizing SKY130 CMOS Technology</summary>
+
+  <details>
+    <summary>Day 0: Installation of Necessary Tools</summary>
+
+  <details>
+  <summary>Yosys</summary>
+
+  ```
+  git clone https://github.com/YosysHQ/yosys.git
+  cd yosys-master 
+  sudo apt install make 
+  sudo apt-get install build-essential clang bison flex \libreadline-dev gawk tcl-dev libffi-dev git\
+                  graphviz xdot pkg-config python3 libboost-system-dev\
+                  libboost-python-dev libboost-filesystem-dev zlib1g-dev
+  make 
+  sudo make install
+  ```
+  ![Screenshot from 2024-10-21 22-12-50](https://github.com/user-attachments/assets/27a04214-1b02-4ea7-badb-f49ed93e2a97)
+  </details>
+
+
+  <details>
+  <summary> iverilog </summary>
+      
+  ```
+  sudo apt-get install iverilog
+  ```
+  ![Screenshot from 2024-10-21 22-35-40](https://github.com/user-attachments/assets/39891605-e818-4b24-b572-0f50aba3b67c)
+  </details>
+
+  <details>
+  <summary> GTKWave </summary>
+      
+  ```
+  sudo apt-get install gtkwave
+  ```
+  ![Screenshot from 2024-10-21 22-38-01](https://github.com/user-attachments/assets/2dfe40c5-521b-4b74-97ad-29da3ae00412)
+  </details>
+
+  </details>
+
+
+  <details>
+    <summary>Day 1: Introduction to Verilog RTL Design and Synthesis</summary>
+
+### RTL Design
+RTL (Register Transfer Level) design is the process of translating specifications into a functional representation of a digital circuit. It serves as an intermediary between high-level behavioral design and low-level gate-level design. RTL focuses on the data transfer between registers, abstracting away the specifics of gate and transistor implementations. Typically, RTL designs are described using Hardware Description Languages (HDLs) such as Verilog or VHDL.
+
+### Test Bench
+A test bench is used to provide stimuli to the design under test (DUT) and verify its functionality as specified in the Verilog description. It is written separately and includes the instantiation of the design that needs to be simulated. The test bench facilitates the validation of the design's performance and behavior.
+
+![Screenshot from 2024-10-21 23-18-04](https://github.com/user-attachments/assets/a9ef82dd-2f23-4cb2-966a-ebcdd9dc34fe)
+
+## Introduction to iverilog and GTKWave
+
+### IVERILOG
+iverilog is an open-source tool for simulating and synthesizing Verilog designs. It is widely used for the design and verification of digital circuits described in the Verilog hardware description language (HDL).
+
+### GTKWave
+GTKWave is a widely-used open-source waveform viewer that enables users to visualize and analyze digital signal waveforms generated during circuit simulations. It is often paired with simulation tools like iverilog, providing a graphical representation of signal changes over time within a digital design.
+  
+![Screenshot from 2024-10-20 16-30-51](https://github.com/user-attachments/assets/ffec0429-8895-459c-9146-ce5482fa561f)
+
+Lets simulate Mux using iverilog and GTKWave
+
+- __[Mux verilog code](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/good_mux.v)__
+- __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/tb_good_mux.v)__
+      
+  ```
+  cd asic
+  mkdir day1
+  cd day1
+  git clone https://github.com/kunalg123/sky130RTLDesignAndSynthesisWorkshop.git
+  cd sky130RTLDesignAndSynthesisWorkshop
+  cd verilog_files
+
+  iverilog good_mux.v tb_good_mux.v
+  ./a.out
+  gtkwave tb_good_mux.vcd
+  ```
+![Screenshot from 2024-10-20 16-11-01](https://github.com/user-attachments/assets/d1f1f98b-cae3-4310-a781-9dadb95fcce2)
+![Screenshot from 2024-10-20 16-11-12](https://github.com/user-attachments/assets/4d820473-d71a-4768-b964-9e82e8370cd6)
+![Screenshot from 2024-10-20 23-48-02](https://github.com/user-attachments/assets/2053d4a8-7bf8-40a4-ad73-8ea6ccb406e7)
+
+## Introduction Yosys
+### Synthesis
+Synthesis refers to the process of converting an RTL design, written in Verilog or another HDL, into a netlist that outlines the interconnections between components. This netlist is intended to perform the same function as the original HDL code. A synthesizer is the tool that facilitates this conversion, with Yosys being one such example.
+
+### Yosys
+Yosys is a tool designed to transform high-level hardware descriptions into optimized gate-level representations suitable for various FPGA and ASIC technologies. The typical workflow involves providing Yosys with the RTL design and a .lib file containing standard library cells. Yosys then synthesizes this information to produce a netlist file.
+
+**Flow of Yosys Synthesis:**
+![Screenshot from 2024-10-22 00-17-52](https://github.com/user-attachments/assets/b877e5b4-d29f-4504-b2ae-6adc5fd5a909)
+
+
+![Screenshot from 2024-10-20 20-01-46](https://github.com/user-attachments/assets/a60ddc37-0141-4008-a933-6db4714472ea)
+
+**Commands to Synthesize a design using Yosys:**
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog good_mux.v
+synth -top good_mux
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show 
+write_verilog -noattr good_mux_netlist.v
+!gedit good_mux_netlist.v 
+  ```
+![Screenshot from 2024-10-20 20-19-56](https://github.com/user-attachments/assets/8af64f7c-2811-4e81-88eb-e25cc8f36b2f)
+
+**Synthesized Mux circuit:**
+![Screenshot from 2024-10-20 20-20-07](https://github.com/user-attachments/assets/91d3f703-63b8-45e2-b692-b73e08d8d106)
+
+
+![Screenshot from 2024-10-20 20-26-00](https://github.com/user-attachments/assets/26c36673-55c1-4202-9dcd-50f6b89e3e98)
+
+**Synthesized Mux Netlist:**
+- __[Mux Netlist](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/good_mux_netlist.v)__
+![Screenshot from 2024-10-20 23-19-03](https://github.com/user-attachments/assets/d672aa35-e1c8-4598-a503-2ada759a0c9b)
+
+
+  </details>
+
+  <details>
+    <summary>Day 2: Timing libs, Hierarchial vs Flat Synthesis and efficient flop coding styles</summary>
+
+  
+
+  </details>
+
+
+  <details>
+    <summary>Day 3: Combinational and Sequential Optimization</summary>
+
+  
+
+  </details>
+
+
+  <details>
+    <summary>Day 4: GLS, Blocking vs Non-Blocking and Synthesis-Simulation mismatch</summary>
+
+  
+
+  </details>
+
+
+  
+
+</details>
+
+
+
 
 
 
