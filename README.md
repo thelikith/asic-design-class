@@ -1350,8 +1350,146 @@ write_verilog -noattr multiple_modules_hier.v
 
   ![Screenshot from 2024-10-21 02-59-06](https://github.com/user-attachments/assets/ff9ab546-96ab-49cd-ad7f-c75858393b45)
 
+## Various Flop Coding Styles and Optimization
+
+### Flop coding styles
+- Asynchronous reset
+- Asynchronous set
+- Synchronous reset
+- Synchronous set
+- Both Asynchronous reset and Synchronous reset
+- Both Asynchronous set and Synchronous set
+
+### D Flipflop Asynchronous reset
+
+**D Flipflop Asynchronous reset Simulation:**
+ - __[Design](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/dff_asyncres.v)__
+ - __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/tb_dff_asyncres.v)__
+  ```
+ iverilog dff_asyncres.v tb_dff_asyncres.v
+ ./a.out
+ gtkwave tb_dff_asyncres.vcd
+  ```
+  ![Screenshot from 2024-10-21 03-23-51](https://github.com/user-attachments/assets/4c31c7d0-5fa9-485b-a82c-afe525abc95c)
+
+
+**D Flipflop Asynchronous reset Synthesis:**
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog dff_asyncres.v
+synth -top dff_asyncres
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+  ```
+![Screenshot from 2024-10-21 03-40-34](https://github.com/user-attachments/assets/e9c12f99-9d74-4d4b-83d5-ce61e3c3215e)
+
+
+### D Flipflop Asynchronous Set
+**D Flipflop Asynchronous Set Simulation:**
+ - __[Design](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/dff_async_set.v)__
+ - __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/tb_dff_async_set.v)__
+  ```
+iverilog dff_async_set.v tb_dff_async_set.v 
+./a.out
+gtkwave tb_dff_async_set.vcd
+  ```
+ ![Screenshot from 2024-10-21 03-28-37](https://github.com/user-attachments/assets/75fc9004-6baf-4297-9539-6fe8ac43951b)
+
+
+**D Flipflop Asynchronous Set Synthesis:**
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog dff_async_set.v
+synth -top dff_async_set
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+  ```
+![Screenshot from 2024-10-21 03-42-48](https://github.com/user-attachments/assets/2c1832b0-cf81-483d-8d4f-b8269aa68b95)
+
+
+
+### D Flipflop Synchronous Reset
+**D Flipflop Synchronous Reset Simulation:**
+ - __[Design](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/dff_syncres.v)__
+ - __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/tb_dff_syncres.v)__
+  ```
+iverilog dff_syncres.v tb_dff_syncres.v
+./a.out
+gtkwave tb_dff_syncres.vcd
+  ```
+![Screenshot from 2024-10-21 03-32-22](https://github.com/user-attachments/assets/41684bc9-5f32-4ce7-a190-f04304e7f026)
+
+
+
+**D Flipflop Synchronous Reset Synthesis:**
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog dff_syncres.v
+synth -top dff_syncres
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+  ```
+![Screenshot from 2024-10-21 03-44-47](https://github.com/user-attachments/assets/840ad2e9-7093-46eb-8ac8-18e9fec3d726)
+
+
+## Optimization
+
+When we perform synthesis yosys optimise the circuit based on the logic.
+### Example1:
+  ```
+module mul2 (input [2:0] a, output [3:0] y);
+assign y = a * 2;
+endmodule
+  ```
+
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog mult_2.v
+synth -top mul2
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+write_verilog -noattr mult2_net.v
+!gedit mult2_net.v
+  ```
+ 
+ - __[Netlist](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/mult2_net.v)__
+![Screenshot from 2024-10-22 02-45-48](https://github.com/user-attachments/assets/bf811bbe-e248-4653-b26f-bc3437a52357)
+
+### Example2:
+  ```
+module mult8 (input [2:0] a , output [5:0] y);
+assign y = a * 9;
+endmodule
+  ```
+
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog mult_8.v
+synth -top mult8
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+write_verilog -noattr mult8_net.v
+!gedit mult8_net.v
+  ```
+ 
+ - __[Netlist](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/mult8_net.v)__
+![Screenshot from 2024-10-22 02-55-04](https://github.com/user-attachments/assets/c055e177-e620-4807-9099-0879927411e7)
 
   </details>
+
 
 
   <details>
