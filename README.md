@@ -1495,6 +1495,190 @@ write_verilog -noattr mult8_net.v
   <details>
     <summary>Day 3: Combinational and Sequential Optimization</summary>
 
+## Combinational Logic Optimization
+- Squeezing the logic to get the most optimised design
+  - Area and Power savings
+- Constant Propagation
+   - Direct Optimisaton
+- Boolean Logic Optimisation
+  - K-Map
+  - Quine McKluskey
+
+    ![20241021_224028450_iOS](https://github.com/user-attachments/assets/f359cb2e-8712-4d00-b69b-ebc8fefc97a0)
+    ![20241021_224100665_iOS](https://github.com/user-attachments/assets/ca73b9a0-9975-4df2-a24d-c3a790166423)
+
+`opt_clean -purge` is used to optimize the synthesized design.   
+
+
+### Example1
+ ```
+module opt_check (input a , input b , output y);
+assign y = a?b:0;
+endmodule
+  ```
+
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog opt_check.v
+synth -top opt_check
+opt_clean -purge
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+  ```
+
+**output is optimized to y = ab**
+
+![Screenshot from 2024-10-21 05-47-26](https://github.com/user-attachments/assets/be30e22b-028c-4545-b26a-e905836ef7d0)
+
+
+
+
+### Example2
+ ```
+module opt_check2 (input a , input b , output y);
+assign y = a?1:b;
+endmodule
+  ```
+
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog opt_check2.v
+synth -top opt_check2
+opt_clean -purge
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+  ```
+
+**output is optimized to y = a + b**
+
+![Screenshot from 2024-10-21 05-49-17](https://github.com/user-attachments/assets/3c723069-98f0-4396-afe7-2839763c5cb8)
+
+
+### Example3
+ ```
+module opt_check3 (input a , input b, input c , output y);
+assign y = a?(c?b:0):0;
+endmodule
+  ```
+
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog opt_check3.v
+synth -top opt_check3
+opt_clean -purge
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+  ```
+
+**output is optimized to y = abc**
+
+![Screenshot from 2024-10-21 05-52-32](https://github.com/user-attachments/assets/20457ed2-7d46-4599-b1ea-83447d3f1986)
+
+
+### Example4
+ ```
+module opt_check4 (input a , input b , input c , output y);
+assign y = a?(b?(a & c ):c):(!c);
+endmodule
+  ```
+
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog opt_check4.v
+synth -top opt_check4
+opt_clean -purge
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+  ```
+**output is optimized to y = xnor(a,c)**
+
+![Screenshot from 2024-10-21 05-54-38](https://github.com/user-attachments/assets/fc021574-5ddd-45f2-a7df-ff8faf40ac66)
+
+If there are multiple modules in the design -> First flatten then Optimize
+
+### Example5
+ ```
+module sub_module1(input a , input b , output y);
+assign y = a & b;
+endmodule
+
+module sub_module2(input a , input b , output y);
+assign y = a^b;
+endmodule
+
+module multiple_module_opt(input a , input b , input c , input d , output y);
+wire n1,n2,n3;
+sub_module1 U1 (.a(a) , .b(1'b1) , .y(n1));
+sub_module2 U2 (.a(n1), .b(1'b0) , .y(n2));
+sub_module2 U3 (.a(b), .b(d) , .y(n3));
+assign y = c | (b & n1); 
+endmodule
+  ```
+
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog multiple_module_opt.v
+synth -top multiple_module_opt
+show multiple_module_opt
+write_verilog -noattr multiple_module_opt_hier.v
+flatten
+opt_clean -purge
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+  ```
+**Before and After Optimization:**
+
+![Screenshot from 2024-10-22 04-39-38](https://github.com/user-attachments/assets/cdb83320-c7c7-4940-bf77-5719dccfab22)
+
+### Example6
+ ```
+module sub_module(input a , input b , output y);
+assign y = a & b;
+endmodule
+
+module multiple_module_opt2(input a , input b , input c , input d , output y);
+wire n1,n2,n3;
+
+sub_module U1 (.a(a) , .b(1'b0) , .y(n1));
+sub_module U2 (.a(b), .b(c) , .y(n2));
+sub_module U3 (.a(n2), .b(d) , .y(n3));
+sub_module U4 (.a(n3), .b(n1) , .y(y));
+endmodule
+  ```
+
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog multiple_module_opt2.v
+synth -top multiple_module_opt2
+show multiple_module_opt2
+write_verilog -noattr multiple_module_opt2_hier.v
+flatten
+opt_clean -purge
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+  ```
+**Before and After Optimization:**
+
+![Screenshot from 2024-10-22 04-43-03](https://github.com/user-attachments/assets/97bd6f70-948b-458e-98c6-e2b9dece2e61)
+
+
+
+
+
+
+
   
 
   </details>
