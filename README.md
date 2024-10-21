@@ -1266,10 +1266,90 @@ write_verilog -noattr good_mux_netlist.v
 
   </details>
 
+
   <details>
     <summary>Day 2: Timing libs, Hierarchial vs Flat Synthesis and efficient flop coding styles</summary>
+    
+## Hierarchical synthesis and flat synthesis
 
+ - __[Multiple Modules](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/multiple_modules.v)__
   
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog multiple_modules.v
+synth -top multiple_modules
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show multiple_modules
+write_verilog -noattr multiple_modules_hier.v
+!gedit multiple_modules_hier.v 
+  ```
+
+  ```
+module sub_module2 (input a, input b, output y);
+	assign y = a | b;
+endmodule
+
+module sub_module1 (input a, input b, output y);
+	assign y = a&b;
+endmodule
+
+module multiple_modules (input a, input b, input c , output y);
+	wire net1;
+	sub_module1 u1(.a(a),.b(b),.y(net1));  //net1 = a&b
+	sub_module2 u2(.a(net1),.b(c),.y(y));  //y = net1|c ,ie y = a&b + c;
+endmodule
+  ```
+
+![20241021_202206068_iOS](https://github.com/user-attachments/assets/4db6366d-1437-4c3d-b104-8408b64484bf)
+
+Yosys synthesizer generates the following schematic instead of the above one
+![Screenshot from 2024-10-21 02-34-52](https://github.com/user-attachments/assets/b23e24fa-740a-45f8-88bf-c40003df1f88)
+
+**Hierarchial synthesis:** In the hierarchial synthesis the hierarchies are preserved. We can see the sub_module1(u1) and sub_module2 (u2) as above. The hierarchial netlist code is given below.
+- __[Hierarchial synthesis](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/multiple_modules_hier.v)__
+![Screenshot from 2024-10-22 01-27-46](https://github.com/user-attachments/assets/7800db08-14e6-4df6-81c1-e5e8ddcf1f73)
+
+**Flattened netlist:** In flattened netlist, the hierarcies are flattend out and there is single module i.e, gates are instantiated directly instead of sub_modules.
+**Commands to flatten the given design:**
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog multiple_modules.v
+synth -top multiple_modules
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+flatten
+show
+write_verilog -noattr multiple_modules_hier.v
+!gedit multiple_modules_hier.v 
+  ```
+**Flattend Design and Netlist:**
+![Screenshot from 2024-10-21 02-52-30](https://github.com/user-attachments/assets/6b473428-71a5-4fc3-9a65-07f2a1361357)
+- __[Flettened Netlist](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/multiple_modules_hier%20(flattend).v)__
+![Screenshot from 2024-10-22 01-36-42](https://github.com/user-attachments/assets/2cc4a018-4161-4a31-96b9-8f724d247f18)
+
+
+**Why Is Submodule Level Synthesis Important?**
+- Submodule level synthesis is advantageous when dealing with multiple instances of the same module. Instead of synthesizing the same module repeatedly, we can synthesize it once and then replicate the resulting netlist as needed, effectively assembling it into the top module's netlist.
+- This approach also embodies a "divide and conquer" strategy. For large designs, synthesis tools may struggle to optimize effectively. By breaking the design into smaller parts and synthesizing them individually, we can achieve optimized netlists for each section, which can then be combined to form the complete top module netlist.
+  
+
+**Commands to Submodule Level Synthesis:**
+  
+  ```
+  cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+  yosys
+  read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+  read_verilog multiple_modules.v
+  synth -top sub_module1
+  abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+  show
+  ```
+
+  ![Screenshot from 2024-10-21 02-59-06](https://github.com/user-attachments/assets/ff9ab546-96ab-49cd-ad7f-c75858393b45)
+
 
   </details>
 
