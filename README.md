@@ -1674,12 +1674,236 @@ show
 ![Screenshot from 2024-10-22 04-43-03](https://github.com/user-attachments/assets/97bd6f70-948b-458e-98c6-e2b9dece2e61)
 
 
+## Sequential Logic Optimization
+- Basic
+   - Sequential Constant propagation
+- Advanced [Not covered as part of Lab]
+  - State optimisation
+  - Retiming
+  - Sequential Logic Cloning (Floor Plan Aware Synthesis)
+
+### Example1
+**Design**
+ ```
+module dff_const1(input clk, input reset, output reg q);
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+		q <= 1'b0;
+	else
+		q <= 1'b1;
+end
+endmodule
+  ```
+
+**Simulation**
+ - __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/tb_dff_const1.v)__
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+iverilog dff_const1.v tb_dff_const1.v
+./a.out
+gtkwave tb_dff_const1.vcd
+  ```
+![Screenshot from 2024-10-21 07-20-01](https://github.com/user-attachments/assets/51cfc7c0-6b4c-4172-ac1e-6cd0cd190758)
+
+**Synthesis**
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog dff_const1.v
+synth -top dff_const1
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+  ```
+![Screenshot from 2024-10-21 06-54-21](https://github.com/user-attachments/assets/23476912-e7c7-4c39-9b61-0a0b283936a9)
+
+### Example2
+**Design**
+ ```
+module dff_const2(input clk, input reset, output reg q);
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+		q <= 1'b1;
+	else
+		q <= 1'b1;
+end
+endmodule
+  ```
+
+**Simulation**
+ - __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/tb_dff_const2.v)__
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+iverilog dff_const2.v tb_dff_const2.v
+./a.out
+gtkwave tb_dff_const2.vcd
+  ```
+![Screenshot from 2024-10-21 06-49-38](https://github.com/user-attachments/assets/aac19038-7765-4d2b-87d7-8ef4ec5e2333)
+
+
+**Synthesis**
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog dff_const2.v
+synth -top dff_const2
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+  ```
+![Screenshot from 2024-10-21 06-56-35](https://github.com/user-attachments/assets/3945e225-4f1e-4f54-83b0-fb796f4bdb56)
+
+
+
+### Example3
+**Design**
+ ```
+module dff_const3(input clk, input reset, output reg q);
+reg q1;
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+	begin
+		q <= 1'b1;
+		q1 <= 1'b0;
+	end
+	else
+	begin
+		q1 <= 1'b1;
+		q <= q1;
+	end
+end
+endmodule
+  ```
+
+**Simulation**
+ - __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/tb_dff_const3.v)__
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+iverilog dff_const3.v tb_dff_const3.v
+./a.out
+gtkwave tb_dff_const3.vcd
+  ```
+![Screenshot from 2024-10-21 07-09-33](https://github.com/user-attachments/assets/2bf8f6e0-a9a7-4e57-9bd6-cd98e76ddd7b)
+
+
+
+**Synthesis**
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog dff_const3.v
+synth -top dff_const3
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+  ```
+![Screenshot from 2024-10-21 07-10-34](https://github.com/user-attachments/assets/77d584cd-3edc-4be7-b5bc-a3926218bc23)
+
+
+
+### Example4
+**Design**
+ ```
+module dff_const4(input clk, input reset, output reg q);
+reg q1;
+
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+	begin
+		q <= 1'b1;
+		q1 <= 1'b1;
+	end
+	else
+	begin
+		q1 <= 1'b1;
+		q <= q1;
+	end
+end
+endmodule
+  ```
+
+**Simulation**
+ - __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/tb_dff_const4.v)__
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+iverilog dff_const4.v tb_dff_const4.v
+./a.out
+gtkwave tb_dff_const4.vcd
+  ```
+![Screenshot from 2024-10-21 07-14-20](https://github.com/user-attachments/assets/8ffde49d-905e-4072-af9e-db41718aa579)
+
+
+
+**Synthesis**
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog dff_const4.v
+synth -top dff_const4
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+  ```
+![Screenshot from 2024-10-21 07-15-05](https://github.com/user-attachments/assets/71471e46-0674-46fc-bde8-087e532743d8)
+
+
+
+### Example5
+**Design**
+ ```
+module dff_const5(input clk, input reset, output reg q);
+reg q1;
+
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+	begin
+		q <= 1'b0;
+		q1 <= 1'b0;
+	end
+	else
+	begin
+		q1 <= 1'b1;
+		q <= q1;
+	end
+end
+endmodule
+  ```
+
+**Simulation**
+ - __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/tb_dff_const5.v)__
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+iverilog dff_const5.v tb_dff_const5.v
+./a.out
+gtkwave tb_dff_const5.vcd
+  ```
+![Screenshot from 2024-10-21 07-16-25](https://github.com/user-attachments/assets/4e4c5cfa-728d-47c3-b541-5de43e6d4efa)
 
 
 
 
+**Synthesis**
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog dff_const5.v
+synth -top dff_const5
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+  ```
+![Screenshot from 2024-10-21 07-16-37](https://github.com/user-attachments/assets/686dc833-6a01-4567-960b-2361d2df6fc1)
 
-  
 
   </details>
 
