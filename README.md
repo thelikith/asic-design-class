@@ -2162,6 +2162,33 @@ Here RTL Simulation and Gate Level Simulation are NOT matching, i.e., **Synthesi
 
   </details>
 
+<details>
+  <summary>Synthesizing RISC-V with Yosys</summary>
+
+ Add the following supporting files for RISC-V to the `verilog_files` folder: `likith_riscv.v`, `likith_riscv_gen.v`, `clk_gate.v`, `sandpiper.vh`, `sp_verilog.vh`, and `sandpiper_gen.vh`.
+
+ ### Commands to Synthesize RISC-V with Yosys
+   ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog likith_riscv.v 
+read_verilog clk_gate.v 
+synth -top RV_CPU
+flatten
+opt_clean -purge
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+write_verilog -noattr likith_riscv_net.v
+show RV_CPU
+  ```
+ __[RISC-V Synthesized Design Netlist](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/RISCV/likith_riscv_net.v)__
+
+ 
+   
+
+  
+
+</details>
 
   
 
