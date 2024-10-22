@@ -1141,7 +1141,7 @@ $ gtkwave pre_synth_sim.vcd
 
 
 <details>
-  <summary>LAB 8: Verilog RTL Design Techniques Utilizing SKY130 CMOS Technology</summary>
+  <summary>LAB 8: RTL Design Using Verilog with SKY130 Technology</summary>
 
   <details>
     <summary>Day 0: Installation of Necessary Tools</summary>
@@ -1197,7 +1197,7 @@ A test bench is used to provide stimuli to the design under test (DUT) and verif
 
 ## Introduction to iverilog and GTKWave
 
-### IVERILOG
+### Iverilog
 iverilog is an open-source tool for simulating and synthesizing Verilog designs. It is widely used for the design and verification of digital circuits described in the Verilog hardware description language (HDL).
 
 ### GTKWave
@@ -1366,6 +1366,7 @@ write_verilog -noattr multiple_modules_hier.v
  - __[Design](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/dff_asyncres.v)__
  - __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/tb_dff_asyncres.v)__
   ```
+ cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
  iverilog dff_asyncres.v tb_dff_asyncres.v
  ./a.out
  gtkwave tb_dff_asyncres.vcd
@@ -1392,6 +1393,7 @@ show
  - __[Design](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/dff_async_set.v)__
  - __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/tb_dff_async_set.v)__
   ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
 iverilog dff_async_set.v tb_dff_async_set.v 
 ./a.out
 gtkwave tb_dff_async_set.vcd
@@ -1419,6 +1421,7 @@ show
  - __[Design](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/dff_syncres.v)__
  - __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/tb_dff_syncres.v)__
   ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
 iverilog dff_syncres.v tb_dff_syncres.v
 ./a.out
 gtkwave tb_dff_syncres.vcd
