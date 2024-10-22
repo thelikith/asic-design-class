@@ -1905,6 +1905,74 @@ show
 ![Screenshot from 2024-10-21 07-16-37](https://github.com/user-attachments/assets/686dc833-6a01-4567-960b-2361d2df6fc1)
 
 
+### Optimization for Unsed Outputs
+
+### Example1
+**Design**
+ ```
+module counter_opt (input clk , input reset , output q);
+reg [2:0] count;
+assign q = count[0];
+
+always @(posedge clk ,posedge reset)
+begin
+	if(reset)
+		count <= 3'b000;
+	else
+		count <= count + 1;
+end
+endmodule
+ ```
+
+**Synthesis**
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog counter_opt.v
+synth -top counter_opt
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+  ```
+
+![Screenshot from 2024-10-21 07-33-04](https://github.com/user-attachments/assets/e6bbe891-7900-4886-afaa-9a0e77cf7fbc)
+
+
+
+### Example2
+**Design**
+ ```
+module counter_opt (input clk , input reset , output q);
+reg [2:0] count;
+assign q = (count[2:0] == 3'b100);
+always @(posedge clk ,posedge reset)
+begin
+	if(reset)
+		count <= 3'b000;
+	else
+		count <= count + 1;
+end
+endmodule
+ ```
+
+**Synthesis**
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog counter_opt2.v
+synth -top counter_opt
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+  ```
+
+![Screenshot from 2024-10-21 07-43-10](https://github.com/user-attachments/assets/6c07d587-1783-4396-af80-5b49cfe236e6)
+
+
+
+
   </details>
 
 
