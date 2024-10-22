@@ -1979,7 +1979,186 @@ show
   <details>
     <summary>Day 4: GLS, Blocking vs Non-Blocking and Synthesis-Simulation mismatch</summary>
 
+## Gate Level Simulation
+
+**What is GLS?**
+- Running the test bench with Netlist as Design Under Test
+- Netlist is logically same as RTL Code.
+  - Same Test Bench will align with the Design.
+
+**Why GLS?**
+- Verify the logical correctness of design after synthesis
+- Ensuring the timing of the design is met.
+
+![Screenshot from 2024-10-21 07-52-05](https://github.com/user-attachments/assets/03e77024-b77e-480e-9f7a-fbf2347acbc6)
   
+### Synthesis Simulation Mismatch
+
+- Missing sensitivity list in always block
+- Blocking vs Non-Blocking Assignments
+- Non standard Verilog coding
+
+  
+### Example1: Good_Mux
+**Design**
+ ```
+module ternary_operator_mux (input i0 , input i1 , input sel , output y);
+	assign y = sel?i1:i0;
+	endmodule
+  ```
+
+**Simulation**
+ - __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/tb_ternary_operator_mux.v)__
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+iverilog ternary_operator_mux.v tb_ternary_operator_mux.v
+./a.out
+gtkwave tb_ternary_operator_mux.vcd
+  ```
+![Screenshot from 2024-10-21 08-23-44](https://github.com/user-attachments/assets/e6d8b4bb-6346-4da6-bed7-3541caf96eb7)
+
+
+
+
+**Synthesis**
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog ternary_operator_mux.v
+synth -top ternary_operator_mux
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+write_verilog -noattr ternary_operator_mux_net.v
+show
+  ```
+
+![Screenshot from 2024-10-21 08-25-40](https://github.com/user-attachments/assets/e0070eec-3796-472d-905c-fb476d84fc94)
+
+
+**Gate Level Simulation**
+ - __[Netlist](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/ternary_operator_mux_net.v)__
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_sc_hd.v ternary_operator_mux_net.v tb_ternary_operator_mux.v
+./a.out
+gtkwave tb_ternary_operator_mux.vcd
+  ```
+![Screenshot from 2024-10-21 08-33-55](https://github.com/user-attachments/assets/ecd5676d-6652-47bf-8aec-a897c556e16e)
+
+Here RTL Simulation and Gate Level Simulation are matching, hence the mux design is a good.
+
+
+  
+### Example2: 
+**Design**
+ ```
+module bad_mux (input i0 , input i1 , input sel , output reg y);
+always @ (sel)
+begin
+	if(sel)
+		y <= i1;
+	else 
+		y <= i0;
+end
+endmodule
+  ```
+
+**Simulation**
+ - __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/tb_bad_mux.v)__
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+iverilog bad_mux.v tb_bad_mux.v
+./a.out
+gtkwave tb_bad_mux.vcd
+  ```
+![Screenshot from 2024-10-21 08-37-48](https://github.com/user-attachments/assets/a5d4d454-46bc-4225-88ec-406495f42b2b)
+
+
+
+
+**Synthesis**
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog bad_mux.v
+synth -top bad_mux
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+write_verilog -noattr bad_mux_net.v
+show
+  ```
+
+![Screenshot from 2024-10-21 08-39-43](https://github.com/user-attachments/assets/60139c73-6e1a-46fb-a1b1-196faaf79bf1)
+
+
+**Gate Level Simulation**
+ - __[Netlist](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/bad_mux_net.v)__
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_sc_hd.v bad_mux_net.v tb_bad_mux.v
+./a.out
+gtkwave tb_bad_mux.vcd
+  ```
+![Screenshot from 2024-10-21 08-42-13](https://github.com/user-attachments/assets/8a1ad4a0-bbe4-4891-a843-98790b184efe)
+
+Here RTL Simulation and Gate Level Simulation are NOT matching, i.e., **Synthesis-Simulation Mismatch** has occured, hence the given mux design is bad. 
+
+
+ 
+### Example3: 
+**Design**
+ ```
+module blocking_caveat (input a , input b , input  c, output reg d); 
+reg x;
+always @ (*)
+begin
+	d = x & c;
+	x = a | b;
+end
+endmodule
+  ```
+
+**Simulation**
+ - __[Testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/tb_blocking_caveat.v)__
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+iverilog blocking_caveat.v tb_blocking_caveat.v
+./a.out
+gtkwave tb_blocking_caveat.vcd
+  ```
+![Screenshot from 2024-10-21 08-56-35](https://github.com/user-attachments/assets/12b02319-1050-44c5-9933-a6c2846790a5)
+
+
+
+
+
+**Synthesis**
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog blocking_caveat.v
+synth -top blocking_caveat
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+write_verilog -noattr blocking_caveat_net.v
+show
+  ```
+
+![Screenshot from 2024-10-21 08-59-40](https://github.com/user-attachments/assets/64550f5c-c1e5-472e-aecd-6f9732d3e5f7)
+
+
+**Gate Level Simulation**
+ - __[Netlist](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/blocking_caveat_net.v)__
+  ```
+cd /home/likith/asic/day1/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_sc_hd.v blocking_caveat_net.v tb_blocking_caveat.v
+./a.out
+gtkwave tb_blocking_caveat.vcd
+  ```
+![Screenshot from 2024-10-21 09-00-43](https://github.com/user-attachments/assets/b0d3acc5-6ead-4ae6-b715-96b23fd9f342)
+
+
+Here RTL Simulation and Gate Level Simulation are NOT matching, i.e., **Synthesis-Simulation Mismatch** has occured due to Blocking Statements.  
 
   </details>
 
