@@ -1305,7 +1305,7 @@ endmodule
 ![20241021_202206068_iOS](https://github.com/user-attachments/assets/4db6366d-1437-4c3d-b104-8408b64484bf)
 
 Yosys synthesizer generates the following schematic instead of the above one
-![Screenshot from 2024-10-21 02-34-52](https://github.com/user-attachments/assets/b23e24fa-740a-45f8-88bf-c40003df1f88)
+![Screenshot from 2024-10-21 02-34-52](https://github.com/user-attachments/assets/478f61b9-80de-4389-81e4-1f1af5c4c51d)
 
 **Hierarchial synthesis:** In the hierarchial synthesis the hierarchies are preserved. We can see the sub_module1(u1) and sub_module2 (u2) as above. The hierarchial netlist code is given below.
 - __[Hierarchial synthesis](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/multiple_modules_hier.v)__
@@ -1326,7 +1326,7 @@ write_verilog -noattr multiple_modules_hier.v
 !gedit multiple_modules_hier.v 
   ```
 **Flattend Design and Netlist:**
-![Screenshot from 2024-10-21 02-52-30](https://github.com/user-attachments/assets/6b473428-71a5-4fc3-9a65-07f2a1361357)
+![Screenshot from 2024-10-21 02-52-30](https://github.com/user-attachments/assets/0db63dba-9d07-43de-9b8a-5c00c3471a4f)
 - __[Flettened Netlist](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/multiple_modules_hier%20(flattend).v)__
 ![Screenshot from 2024-10-22 01-36-42](https://github.com/user-attachments/assets/2cc4a018-4161-4a31-96b9-8f724d247f18)
 
@@ -1347,8 +1347,8 @@ write_verilog -noattr multiple_modules_hier.v
   abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
   show
   ```
-
-  ![Screenshot from 2024-10-21 02-59-06](https://github.com/user-attachments/assets/ff9ab546-96ab-49cd-ad7f-c75858393b45)
+  ![Screenshot from 2024-10-21 02-59-06](https://github.com/user-attachments/assets/33346966-72d6-4b18-a097-27078fb33878)
+  
 
 ## Various Flop Coding Styles and Optimization
 
@@ -1385,7 +1385,7 @@ dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
 show
   ```
-![Screenshot from 2024-10-21 03-40-34](https://github.com/user-attachments/assets/e9c12f99-9d74-4d4b-83d5-ce61e3c3215e)
+![ar](https://github.com/user-attachments/assets/dc676871-d204-4372-951d-732b68800b66)
 
 
 ### D Flipflop Asynchronous Set
@@ -1412,7 +1412,7 @@ dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
 show
   ```
-![Screenshot from 2024-10-21 03-42-48](https://github.com/user-attachments/assets/2c1832b0-cf81-483d-8d4f-b8269aa68b95)
+![as](https://github.com/user-attachments/assets/c83da979-062c-4f22-a138-964710fb2b02)
 
 
 
@@ -1441,7 +1441,11 @@ dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
 show
   ```
-![Screenshot from 2024-10-21 03-44-47](https://github.com/user-attachments/assets/840ad2e9-7093-46eb-8ac8-18e9fec3d726)
+
+
+
+![sr](https://github.com/user-attachments/assets/7c8a7835-b3fb-4610-a064-0366067f7858)
+
 
 
 ## Optimization
