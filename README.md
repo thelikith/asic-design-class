@@ -1465,7 +1465,9 @@ show
 write_verilog -noattr mult2_net.v
 !gedit mult2_net.v
   ```
- 
+
+ ![20241022_013453528_iOS](https://github.com/user-attachments/assets/25ae9463-63dc-45fc-9fae-bc0f82ea1828)
+
  - __[Netlist](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/mult2_net.v)__
 ![Screenshot from 2024-10-22 02-45-48](https://github.com/user-attachments/assets/bf811bbe-e248-4653-b26f-bc3437a52357)
 
@@ -1487,7 +1489,9 @@ show
 write_verilog -noattr mult8_net.v
 !gedit mult8_net.v
   ```
- 
+
+ ![20241022_013513573_iOS](https://github.com/user-attachments/assets/04b65c35-baa8-4ea0-a8a0-f9aecb00aa33)
+
  - __[Netlist](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/mult8_net.v)__
 ![Screenshot from 2024-10-22 02-55-04](https://github.com/user-attachments/assets/c055e177-e620-4807-9099-0879927411e7)
 
@@ -1530,10 +1534,11 @@ opt_clean -purge
 abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
 show
   ```
+![1](https://github.com/user-attachments/assets/4e7c6033-c28f-4cf2-abbe-fc47bbf6f075)
 
 **output is optimized to y = ab**
 
-![Screenshot from 2024-10-21 05-47-26](https://github.com/user-attachments/assets/be30e22b-028c-4545-b26a-e905836ef7d0)
+![Screenshot from 2024-10-21 05-47-26](https://github.com/user-attachments/assets/4f30b904-9ed3-4318-9406-c3d4267b98a8)
 
 
 
@@ -1555,10 +1560,12 @@ opt_clean -purge
 abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
 show
   ```
+![2](https://github.com/user-attachments/assets/9a43bd46-78b7-47c3-8d05-c6e70abc42ce)
 
 **output is optimized to y = a + b**
 
-![Screenshot from 2024-10-21 05-49-17](https://github.com/user-attachments/assets/3c723069-98f0-4396-afe7-2839763c5cb8)
+![Screenshot from 2024-10-21 05-49-17](https://github.com/user-attachments/assets/cd9fdbde-01a1-4298-a634-f0bd7cbbffb6)
+
 
 
 ### Example3
@@ -1578,10 +1585,12 @@ opt_clean -purge
 abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
 show
   ```
+![3](https://github.com/user-attachments/assets/c62b2c54-8480-4d4d-a1f5-f5ee8e1f16a7)
 
 **output is optimized to y = abc**
 
-![Screenshot from 2024-10-21 05-52-32](https://github.com/user-attachments/assets/20457ed2-7d46-4599-b1ea-83447d3f1986)
+![Screenshot from 2024-10-21 05-52-32](https://github.com/user-attachments/assets/499c63b6-8001-4828-bf3a-743f4e49115c)
+
 
 
 ### Example4
@@ -1601,9 +1610,11 @@ opt_clean -purge
 abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
 show
   ```
+![4](https://github.com/user-attachments/assets/60976e4d-518d-4141-b1ae-3ba063858e1a)
+
 **output is optimized to y = xnor(a,c)**
 
-![Screenshot from 2024-10-21 05-54-38](https://github.com/user-attachments/assets/fc021574-5ddd-45f2-a7df-ff8faf40ac66)
+![Screenshot from 2024-10-21 05-54-38](https://github.com/user-attachments/assets/5764cb0f-b072-48a7-9529-4866051548c1)
 
 If there are multiple modules in the design -> First flatten then Optimize
 
