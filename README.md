@@ -2246,8 +2246,9 @@ cd /home/likith/lab9
 git clone https://github.com/Subhasis-Sahu/BabySoC_Simulation
 cd BabySoC_Simulation
   ```
-- Copy the generated netlist file to `/home/likith/lab9/BabySoC_Simulation/src/module` and include it in the **[testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%209/testbench.v)**
-- Add the generated `rvmyth_netlist.v`, along with `primitives.v` and `sky130_fd_sc_hd.v` from [this folder](https://github.com/thelikith/asic-design-class/tree/main/Codes/Lab%209/Synthesis) to the directory `/home/likith/lab9/BabySoC_Simulation/src/module`.
+- Copy the generated netlist file to `/home/likith/lab9/BabySoC_Simulation/src/module`
+- Add the files `primitives.v` and `sky130_fd_sc_hd.v` from [this folder](https://github.com/thelikith/asic-design-class/tree/main/Codes/Lab%209/Synthesis) to the directory `/home/likith/lab9/BabySoC_Simulation/src/module`.
+- Replace the testbench in `/home/likith/lab9/BabySoC_Simulation/src/module` with this [testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%209/testbench.v)
   
 ```
 cd src/module
