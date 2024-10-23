@@ -2238,6 +2238,8 @@ show rvmyth
 
 After synthesizing the RISC-V core, we will integrate the resulting netlist into BabySoC for simulation. This process is called as Post-Synthesis Simulation or Gate-Level Simulation.
 
+## BabySoC Post Synthesis Simulation
+
 **Commands for Gate-Level Simulation**
   ```
 cd /home/likith/lab9
