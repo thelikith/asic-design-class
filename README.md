@@ -1115,6 +1115,7 @@ Converting a digital output from a CPU into an analog signal using a DAC (Digita
 ```
 
 ```
+$ cd BabySoC_Simulation
 $ iverilog -o ./pre_synth_sim.out -DPRE_SYNTH_SIM src/module/testbench.v -I src/include -I src/module/
 $ ./pre_synth_sim.out
 $ gtkwave pre_synth_sim.vcd
@@ -2201,17 +2202,75 @@ show RV_CPU
   ```
  __[RISC-V Synthesized Design Netlist](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%208/RISCV/likith_riscv_net.v)__
 
- 
+</details>
+</details>
+
+
+
+
+***
+
+
+
+
+<details>
+  <summary>LAB 9:  RISC-V Synthesis for Gate-Level Simulation of BabySoC</summary>
+
+## Synthesis of RISCV Core
+
+- Create the directory by running `mkdir -p /home/likith/lab9/synthesis`.
+- Download and add the files from [this folder](https://github.com/thelikith/asic-design-class/tree/main/Codes/Lab%209/Synthesis) to the synthesis folder.
+
+**Commands for Synthesis**
+  ```
+cd /home/likith/lab9/synthesis
+yosys
+read_liberty -lib sky130_fd_sc_hd__tt_025C_1v80.lib 
+read_verilog rvmyth.v 
+read_verilog clk_gate.v 
+synth -top rvmyth
+abc -liberty sky130_fd_sc_hd__tt_025C_1v80.lib 
+write_verilog -noattr rvmyth_netlist.v
+show rvmyth
+  ```
+
+**[RISC-V Design Netlist](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%209/rvmyth_netlist.v)**
+
+After synthesizing the RISC-V core, we will integrate the resulting netlist into BabySoC for simulation. This process is called as Post-Synthesis Simulation or Gate-Level Simulation.
+
+**Commands for Gate-Level Simulation**
+  ```
+cd /home/likith/lab9
+git clone https://github.com/Subhasis-Sahu/BabySoC_Simulation
+cd BabySoC_Simulation
+  ```
+- Copy the generated netlist file to `/home/likith/lab9/BabySoC_Simulation/src/module` and include it in the **[testbench](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%209/testbench.v)**
+- Add the generated `rvmyth_netlist.v`, along with `primitives.v` and `sky130_fd_sc_hd.v` from [this folder](https://github.com/thelikith/asic-design-class/tree/main/Codes/Lab%209/Synthesis) to the directory `/home/likith/lab9/BabySoC_Simulation/src/module`.
+  
+```
+cd src/module
+iverilog -o post_synth.out primitives.v sky130_fd_sc_hd.v testbench.v -D POST_SYNTH_SIM
+./post_synth.out
+gtkwave post_synth_sim.vcd
+```
+**Post-Synthesis Simulation Results:**
+
+![Screenshot from 2024-10-24 02-46-35](https://github.com/user-attachments/assets/8af59f82-d83c-4a92-a007-7a304eb4fcb3)
+![Screenshot from 2024-10-24 02-47-15](https://github.com/user-attachments/assets/c5008f36-3557-4708-b53b-ee5dd0f99440)
+
+
+
+**Pre-Synthesis Simulation Result from Lab 7**
+![Screenshot from 2024-09-01 20-27-49](https://github.com/user-attachments/assets/f1ef42f8-8412-4bf4-bdad-f2437e8c5f05)
+
+The Post-Synthesis Simulation Results and Pre-Synthesis Simulation Results have been verified.
+
+
    
 
-  
+   
 
 </details>
-
-  
-
-</details>
-
 
 
 
