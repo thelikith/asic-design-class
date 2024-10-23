@@ -2221,7 +2221,7 @@ show RV_CPU
 - Create the directory by running `mkdir -p /home/likith/lab9/synthesis`.
 - Download and add the files from [this folder](https://github.com/thelikith/asic-design-class/tree/main/Codes/Lab%209/Synthesis) to the synthesis folder.
 
-**Commands for Synthesis**
+**Commands for Synthesis:**
   ```
 cd /home/likith/lab9/synthesis
 yosys
@@ -2240,7 +2240,7 @@ After synthesizing the RISC-V core, we will integrate the resulting netlist into
 
 ## BabySoC Post Synthesis Simulation
 
-**Commands for Gate-Level Simulation**
+**Commands for Gate-Level Simulation:**
   ```
 cd /home/likith/lab9
 git clone https://github.com/Subhasis-Sahu/BabySoC_Simulation
@@ -2255,6 +2255,8 @@ iverilog -o post_synth.out primitives.v sky130_fd_sc_hd.v testbench.v -D POST_SY
 ./post_synth.out
 gtkwave post_synth_sim.vcd
 ```
+![Screenshot from 2024-10-24 03-01-43](https://github.com/user-attachments/assets/66da4c43-c4e3-4ac6-be4b-9a1d8b907218)
+
 **Post-Synthesis Simulation Results:**
 
 ![Screenshot from 2024-10-24 02-46-35](https://github.com/user-attachments/assets/8af59f82-d83c-4a92-a007-7a304eb4fcb3)
@@ -2262,7 +2264,7 @@ gtkwave post_synth_sim.vcd
 
 
 
-**Pre-Synthesis Simulation Result from Lab 7**
+**Pre-Synthesis Simulation Result from Lab 7:**
 ![Screenshot from 2024-09-01 20-27-49](https://github.com/user-attachments/assets/f1ef42f8-8412-4bf4-bdad-f2437e8c5f05)
 
 The Post-Synthesis Simulation Results and Pre-Synthesis Simulation Results have been verified.
