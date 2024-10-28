@@ -3,7 +3,7 @@
    `include "vsdbabysoc.v"
    `include "avsddac.v"
    `include "avsdpll.v"
-   `include "rvmyth.v"
+   `include "likith_riscv.v"
    `include "clk_gate.v"
 `elsif POST_SYNTH_SIM
    `include "vsdbabysoc.synth.v"
