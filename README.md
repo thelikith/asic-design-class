@@ -2271,13 +2271,73 @@ gtkwave post_synth_sim.vcd
 The Post-Synthesis Simulation Results and Pre-Synthesis Simulation Results have been verified.
 
 
-   
-
-   
-
 </details>
 
 
 
 
+***
 
+
+
+<details>
+  <summary>LAB 10: Static Timing Analysis for a RISC-V Core Synthesized with OpenSTA </summary>
+
+## Tools Installation
+**CUDD**
+Download CUDD from **[here](https://github.com/davidkebo/cudd/blob/main/cudd_versions/cudd-3.0.0.tar.gz)** and move downloaded file to `home` directory
+```
+cd
+tar xvfz cudd-3.0.0.tar.gz
+cd cudd-3.0.0
+./configure
+make
+```
+**openSTA**
+```
+cd
+sudo apt-get install cmake clang gcc tcl swig bison flex
+
+git clone https://github.com/parallaxsw/OpenSTA.git
+cd OpenSTA
+cmake -DCUDD_DIR=/home/likith/cudd-3.0.0
+make
+app/sta
+```
+
+![Screenshot from 2024-10-28 18-53-19](https://github.com/user-attachments/assets/1cac049f-f06a-4f7d-8416-bbbc0a9a6835)
+
+```
+cd /home/likith/OpenSTA
+mkdir lab10
+```
+Download all the **[required files](https://github.com/thelikith/asic-design-class/tree/main/Codes/Lab%2010)** to directory `lab10`
+
+**Steps to do Timing Analysis**
+- Clock period = 9.45ns
+- Setup uncertainty and clock transition will be 5% of clock
+- Hold uncertainty and data transition will be 8% of clock. 
+
+```
+cd /home/likith/OpenSTA/app
+./sta
+
+read_liberty /home/likith/OpenSTA/lab10/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog /home/likith/OpenSTA/lab10/likith_riscv_netlist.v
+link_design rvmyth
+
+create_clock -name clk -period 9.45 [get_ports clk]
+set_clock_uncertainty [expr 0.05 * 9.45] -setup [get_clocks clk]
+set_clock_uncertainty [expr 0.08 * 9.45] -hold [get_clocks clk]
+set_clock_transition [expr 0.05 * 9.45] [get_clocks clk]
+set_input_transition [expr 0.08 * 9.45] [all_inputs]
+
+report_checks -path_delay max
+report_checks -path_delay min
+```
+![Screenshot from 2024-10-28 18-31-32](https://github.com/user-attachments/assets/6ce2808f-3494-4beb-b485-94139a3b4bf6)   
+![Screenshot from 2024-10-28 18-31-55](https://github.com/user-attachments/assets/0981c146-78ff-4d4c-b0da-e522926fd982)
+![Screenshot from 2024-10-28 18-32-01](https://github.com/user-attachments/assets/7763f3f1-5479-44cc-9eeb-9cbde27ea740)
+
+
+</details>
