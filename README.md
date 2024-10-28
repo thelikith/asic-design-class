@@ -2281,7 +2281,7 @@ The Post-Synthesis Simulation Results and Pre-Synthesis Simulation Results have 
 
 
 <details>
-  <summary>LAB 10: Static Timing Analysis for a RISC-V Core Synthesized with OpenSTA </summary>
+  <summary>LAB 10: Static Timing Analysis for a Synthesized RISC-V Core with OpenSTA </summary>
 
 ## Tools Installation
 **CUDD**
