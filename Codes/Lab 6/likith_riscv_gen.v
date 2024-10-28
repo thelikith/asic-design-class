@@ -9,12 +9,17 @@
 `include "sandpiper_gen.vh"
 
 
-genvar dmem, imem, xreg;
+genvar xreg;
 
 
 //
 // Signals declared top-level.
 //
+
+// For |cpu$auipc.
+wire CPU_auipc_a1;
+reg  CPU_auipc_a2,
+     CPU_auipc_a3;
 
 // For |cpu$br_tgt_pc.
 wire [31:0] CPU_br_tgt_pc_a2;
@@ -22,30 +27,9 @@ reg  [31:0] CPU_br_tgt_pc_a3;
 
 // For |cpu$clk_lik.
 wire CPU_clk_lik_a0;
-reg  CPU_clk_lik_a1,
-     CPU_clk_lik_a2,
-     CPU_clk_lik_a3,
-     CPU_clk_lik_a4,
-     CPU_clk_lik_a5;
 
 // For |cpu$dec_bits.
 wire [10:0] CPU_dec_bits_a1;
-
-// For |cpu$dmem_addr.
-wire [3:0] CPU_dmem_addr_a4;
-
-// For |cpu$dmem_rd_data.
-wire [31:0] w_CPU_dmem_rd_data_a4;
-reg  [31:0] CPU_dmem_rd_data_a5;
-
-// For |cpu$dmem_rd_en.
-wire CPU_dmem_rd_en_a4;
-
-// For |cpu$dmem_wr_data.
-wire [31:0] CPU_dmem_wr_data_a4;
-
-// For |cpu$dmem_wr_en.
-wire CPU_dmem_wr_en_a4;
 
 // For |cpu$funct3.
 wire [2:0] CPU_funct3_a1;
@@ -77,8 +61,6 @@ reg  [31:0] CPU_imm_a2,
 
 // For |cpu$inc_pc.
 wire [31:0] CPU_inc_pc_a1;
-reg  [31:0] CPU_inc_pc_a2,
-            CPU_inc_pc_a3;
 
 // For |cpu$instr.
 wire [31:0] CPU_instr_a1;
@@ -103,55 +85,38 @@ wire CPU_is_andi_a1;
 reg  CPU_is_andi_a2,
      CPU_is_andi_a3;
 
-// For |cpu$is_auipc.
-wire CPU_is_auipc_a1;
-reg  CPU_is_auipc_a2,
-     CPU_is_auipc_a3;
-
 // For |cpu$is_b_instr.
 wire CPU_is_b_instr_a1;
 
 // For |cpu$is_beq.
 wire CPU_is_beq_a1;
 reg  CPU_is_beq_a2,
-     CPU_is_beq_a3,
-     CPU_is_beq_a4,
-     CPU_is_beq_a5;
+     CPU_is_beq_a3;
 
 // For |cpu$is_bge.
 wire CPU_is_bge_a1;
 reg  CPU_is_bge_a2,
-     CPU_is_bge_a3,
-     CPU_is_bge_a4,
-     CPU_is_bge_a5;
+     CPU_is_bge_a3;
 
 // For |cpu$is_bgeu.
 wire CPU_is_bgeu_a1;
 reg  CPU_is_bgeu_a2,
-     CPU_is_bgeu_a3,
-     CPU_is_bgeu_a4,
-     CPU_is_bgeu_a5;
+     CPU_is_bgeu_a3;
 
 // For |cpu$is_blt.
 wire CPU_is_blt_a1;
 reg  CPU_is_blt_a2,
-     CPU_is_blt_a3,
-     CPU_is_blt_a4,
-     CPU_is_blt_a5;
+     CPU_is_blt_a3;
 
 // For |cpu$is_bltu.
 wire CPU_is_bltu_a1;
 reg  CPU_is_bltu_a2,
-     CPU_is_bltu_a3,
-     CPU_is_bltu_a4,
-     CPU_is_bltu_a5;
+     CPU_is_bltu_a3;
 
 // For |cpu$is_bne.
 wire CPU_is_bne_a1;
 reg  CPU_is_bne_a2,
-     CPU_is_bne_a3,
-     CPU_is_bne_a4,
-     CPU_is_bne_a5;
+     CPU_is_bne_a3;
 
 // For |cpu$is_i_instr.
 wire CPU_is_i_instr_a1;
@@ -159,30 +124,8 @@ wire CPU_is_i_instr_a1;
 // For |cpu$is_j_instr.
 wire CPU_is_j_instr_a1;
 
-// For |cpu$is_jal.
-wire CPU_is_jal_a1;
-reg  CPU_is_jal_a2,
-     CPU_is_jal_a3;
-
-// For |cpu$is_jalr.
-wire CPU_is_jalr_a1;
-reg  CPU_is_jalr_a2,
-     CPU_is_jalr_a3;
-
-// For |cpu$is_jump.
-wire CPU_is_jump_a1;
-reg  CPU_is_jump_a2,
-     CPU_is_jump_a3;
-
 // For |cpu$is_load.
 wire CPU_is_load_a1;
-reg  CPU_is_load_a2,
-     CPU_is_load_a3;
-
-// For |cpu$is_lui.
-wire CPU_is_lui_a1;
-reg  CPU_is_lui_a2,
-     CPU_is_lui_a3;
 
 // For |cpu$is_or.
 wire CPU_is_or_a1;
@@ -199,23 +142,12 @@ wire CPU_is_r_instr_a1;
 
 // For |cpu$is_s_instr.
 wire CPU_is_s_instr_a1;
-reg  CPU_is_s_instr_a2,
-     CPU_is_s_instr_a3,
-     CPU_is_s_instr_a4;
 
 // For |cpu$is_sb.
 wire CPU_is_sb_a1;
-reg  CPU_is_sb_a2,
-     CPU_is_sb_a3,
-     CPU_is_sb_a4,
-     CPU_is_sb_a5;
 
 // For |cpu$is_sh.
 wire CPU_is_sh_a1;
-reg  CPU_is_sh_a2,
-     CPU_is_sh_a3,
-     CPU_is_sh_a4,
-     CPU_is_sh_a5;
 
 // For |cpu$is_sll.
 wire CPU_is_sll_a1;
@@ -274,10 +206,6 @@ reg  CPU_is_sub_a2,
 
 // For |cpu$is_sw.
 wire CPU_is_sw_a1;
-reg  CPU_is_sw_a2,
-     CPU_is_sw_a3,
-     CPU_is_sw_a4,
-     CPU_is_sw_a5;
 
 // For |cpu$is_u_instr.
 wire CPU_is_u_instr_a1;
@@ -292,12 +220,20 @@ wire CPU_is_xori_a1;
 reg  CPU_is_xori_a2,
      CPU_is_xori_a3;
 
-// For |cpu$jalr_tgt_pc.
-wire [31:0] CPU_jalr_tgt_pc_a2;
-reg  [31:0] CPU_jalr_tgt_pc_a3;
+// For |cpu$jal.
+wire CPU_jal_a1;
+reg  CPU_jal_a2,
+     CPU_jal_a3;
 
-// For |cpu$ld_data.
-wire [31:0] CPU_ld_data_a5;
+// For |cpu$jalr.
+wire CPU_jalr_a1;
+reg  CPU_jalr_a2,
+     CPU_jalr_a3;
+
+// For |cpu$lui.
+wire CPU_lui_a1;
+reg  CPU_lui_a2,
+     CPU_lui_a3;
 
 // For |cpu$opcode.
 wire [6:0] CPU_opcode_a1;
@@ -311,26 +247,21 @@ reg  [31:0] CPU_pc_a1,
 // For |cpu$rd.
 wire [4:0] w_CPU_rd_a1;
 reg  [4:0] CPU_rd_a2,
-           CPU_rd_a3,
-           CPU_rd_a4,
-           CPU_rd_a5;
+           CPU_rd_a3;
 
 // For |cpu$rd_valid.
 wire CPU_rd_valid_a1;
 reg  CPU_rd_valid_a2,
-     CPU_rd_valid_a3,
-     CPU_rd_valid_a4;
+     CPU_rd_valid_a3;
 
 // For |cpu$reset.
 wire CPU_reset_a0;
 reg  CPU_reset_a1,
      CPU_reset_a2,
-     CPU_reset_a3,
-     CPU_reset_a4;
+     CPU_reset_a3;
 
 // For |cpu$result.
 wire [31:0] CPU_result_a3;
-reg  [5:2] CPU_result_a4;
 
 // For |cpu$rf_rd_data1.
 wire [31:0] CPU_rf_rd_data1_a2;
@@ -387,37 +318,21 @@ reg  [31:0] CPU_src1_value_a3;
 
 // For |cpu$src2_value.
 wire [31:0] CPU_src2_value_a2;
-reg  [31:0] CPU_src2_value_a3,
-            CPU_src2_value_a4;
+reg  [31:0] CPU_src2_value_a3;
+
+// For |cpu$start.
+wire CPU_start_a0;
 
 // For |cpu$taken_br.
 wire CPU_taken_br_a3;
 
 // For |cpu$valid.
 wire CPU_valid_a3;
-reg  CPU_valid_a4;
-
-// For |cpu$valid_jump.
-wire CPU_valid_jump_a3;
-reg  CPU_valid_jump_a4,
-     CPU_valid_jump_a5;
-
-// For |cpu$valid_load.
-wire CPU_valid_load_a3;
-reg  CPU_valid_load_a4,
-     CPU_valid_load_a5;
 
 // For |cpu$valid_taken_br.
 wire CPU_valid_taken_br_a3;
 reg  CPU_valid_taken_br_a4,
      CPU_valid_taken_br_a5;
-
-// For |cpu/dmem$value.
-wire [31:0] CPU_Dmem_value_a4 [15:0];
-reg  [31:0] CPU_Dmem_value_a5 [15:0];
-
-// For |cpu/imem$instr.
-wire [31:0] CPU_Imem_instr_a1 [9:0];
 
 // For |cpu/xreg$value.
 wire [31:0] CPU_Xreg_value_a3 [31:0];
@@ -430,11 +345,8 @@ reg  [31:0] CPU_Xreg_value_a4 [31:0],
 //
 
 // Clock signals.
-wire clkP_CPU_dmem_rd_en_a5 ;
 wire clkP_CPU_rd_valid_a2 ;
 wire clkP_CPU_rd_valid_a3 ;
-wire clkP_CPU_rd_valid_a4 ;
-wire clkP_CPU_rd_valid_a5 ;
 wire clkP_CPU_rs1_valid_a2 ;
 wire clkP_CPU_rs2_valid_a2 ;
 
@@ -444,18 +356,12 @@ wire clkP_CPU_rs2_valid_a2 ;
    // Scope: |cpu
    //
 
+      // Staging of $auipc.
+      always @(posedge clk) CPU_auipc_a2 <= CPU_auipc_a1;
+      always @(posedge clk) CPU_auipc_a3 <= CPU_auipc_a2;
+
       // Staging of $br_tgt_pc.
       always @(posedge clk) CPU_br_tgt_pc_a3[31:0] <= CPU_br_tgt_pc_a2[31:0];
-
-      // Staging of $clk_lik.
-      always @(posedge clk) CPU_clk_lik_a1 <= CPU_clk_lik_a0;
-      always @(posedge clk) CPU_clk_lik_a2 <= CPU_clk_lik_a1;
-      always @(posedge clk) CPU_clk_lik_a3 <= CPU_clk_lik_a2;
-      always @(posedge clk) CPU_clk_lik_a4 <= CPU_clk_lik_a3;
-      always @(posedge clk) CPU_clk_lik_a5 <= CPU_clk_lik_a4;
-
-      // Staging of $dmem_rd_data.
-      always @(posedge clkP_CPU_dmem_rd_en_a5) CPU_dmem_rd_data_a5[31:0] <= w_CPU_dmem_rd_data_a4[31:0];
 
       // Staging of $imem_rd_addr.
       always @(posedge clk) CPU_imem_rd_addr_a1[31:0] <= CPU_imem_rd_addr_a0[31:0];
@@ -466,10 +372,6 @@ wire clkP_CPU_rs2_valid_a2 ;
       // Staging of $imm.
       always @(posedge clk) CPU_imm_a2[31:0] <= CPU_imm_a1[31:0];
       always @(posedge clk) CPU_imm_a3[31:0] <= CPU_imm_a2[31:0];
-
-      // Staging of $inc_pc.
-      always @(posedge clk) CPU_inc_pc_a2[31:0] <= CPU_inc_pc_a1[31:0];
-      always @(posedge clk) CPU_inc_pc_a3[31:0] <= CPU_inc_pc_a2[31:0];
 
       // Staging of $is_add.
       always @(posedge clk) CPU_is_add_a2 <= CPU_is_add_a1;
@@ -487,65 +389,29 @@ wire clkP_CPU_rs2_valid_a2 ;
       always @(posedge clk) CPU_is_andi_a2 <= CPU_is_andi_a1;
       always @(posedge clk) CPU_is_andi_a3 <= CPU_is_andi_a2;
 
-      // Staging of $is_auipc.
-      always @(posedge clk) CPU_is_auipc_a2 <= CPU_is_auipc_a1;
-      always @(posedge clk) CPU_is_auipc_a3 <= CPU_is_auipc_a2;
-
       // Staging of $is_beq.
       always @(posedge clk) CPU_is_beq_a2 <= CPU_is_beq_a1;
       always @(posedge clk) CPU_is_beq_a3 <= CPU_is_beq_a2;
-      always @(posedge clk) CPU_is_beq_a4 <= CPU_is_beq_a3;
-      always @(posedge clk) CPU_is_beq_a5 <= CPU_is_beq_a4;
 
       // Staging of $is_bge.
       always @(posedge clk) CPU_is_bge_a2 <= CPU_is_bge_a1;
       always @(posedge clk) CPU_is_bge_a3 <= CPU_is_bge_a2;
-      always @(posedge clk) CPU_is_bge_a4 <= CPU_is_bge_a3;
-      always @(posedge clk) CPU_is_bge_a5 <= CPU_is_bge_a4;
 
       // Staging of $is_bgeu.
       always @(posedge clk) CPU_is_bgeu_a2 <= CPU_is_bgeu_a1;
       always @(posedge clk) CPU_is_bgeu_a3 <= CPU_is_bgeu_a2;
-      always @(posedge clk) CPU_is_bgeu_a4 <= CPU_is_bgeu_a3;
-      always @(posedge clk) CPU_is_bgeu_a5 <= CPU_is_bgeu_a4;
 
       // Staging of $is_blt.
       always @(posedge clk) CPU_is_blt_a2 <= CPU_is_blt_a1;
       always @(posedge clk) CPU_is_blt_a3 <= CPU_is_blt_a2;
-      always @(posedge clk) CPU_is_blt_a4 <= CPU_is_blt_a3;
-      always @(posedge clk) CPU_is_blt_a5 <= CPU_is_blt_a4;
 
       // Staging of $is_bltu.
       always @(posedge clk) CPU_is_bltu_a2 <= CPU_is_bltu_a1;
       always @(posedge clk) CPU_is_bltu_a3 <= CPU_is_bltu_a2;
-      always @(posedge clk) CPU_is_bltu_a4 <= CPU_is_bltu_a3;
-      always @(posedge clk) CPU_is_bltu_a5 <= CPU_is_bltu_a4;
 
       // Staging of $is_bne.
       always @(posedge clk) CPU_is_bne_a2 <= CPU_is_bne_a1;
       always @(posedge clk) CPU_is_bne_a3 <= CPU_is_bne_a2;
-      always @(posedge clk) CPU_is_bne_a4 <= CPU_is_bne_a3;
-      always @(posedge clk) CPU_is_bne_a5 <= CPU_is_bne_a4;
-
-      // Staging of $is_jal.
-      always @(posedge clk) CPU_is_jal_a2 <= CPU_is_jal_a1;
-      always @(posedge clk) CPU_is_jal_a3 <= CPU_is_jal_a2;
-
-      // Staging of $is_jalr.
-      always @(posedge clk) CPU_is_jalr_a2 <= CPU_is_jalr_a1;
-      always @(posedge clk) CPU_is_jalr_a3 <= CPU_is_jalr_a2;
-
-      // Staging of $is_jump.
-      always @(posedge clk) CPU_is_jump_a2 <= CPU_is_jump_a1;
-      always @(posedge clk) CPU_is_jump_a3 <= CPU_is_jump_a2;
-
-      // Staging of $is_load.
-      always @(posedge clk) CPU_is_load_a2 <= CPU_is_load_a1;
-      always @(posedge clk) CPU_is_load_a3 <= CPU_is_load_a2;
-
-      // Staging of $is_lui.
-      always @(posedge clk) CPU_is_lui_a2 <= CPU_is_lui_a1;
-      always @(posedge clk) CPU_is_lui_a3 <= CPU_is_lui_a2;
 
       // Staging of $is_or.
       always @(posedge clk) CPU_is_or_a2 <= CPU_is_or_a1;
@@ -554,23 +420,6 @@ wire clkP_CPU_rs2_valid_a2 ;
       // Staging of $is_ori.
       always @(posedge clk) CPU_is_ori_a2 <= CPU_is_ori_a1;
       always @(posedge clk) CPU_is_ori_a3 <= CPU_is_ori_a2;
-
-      // Staging of $is_s_instr.
-      always @(posedge clk) CPU_is_s_instr_a2 <= CPU_is_s_instr_a1;
-      always @(posedge clk) CPU_is_s_instr_a3 <= CPU_is_s_instr_a2;
-      always @(posedge clk) CPU_is_s_instr_a4 <= CPU_is_s_instr_a3;
-
-      // Staging of $is_sb.
-      always @(posedge clk) CPU_is_sb_a2 <= CPU_is_sb_a1;
-      always @(posedge clk) CPU_is_sb_a3 <= CPU_is_sb_a2;
-      always @(posedge clk) CPU_is_sb_a4 <= CPU_is_sb_a3;
-      always @(posedge clk) CPU_is_sb_a5 <= CPU_is_sb_a4;
-
-      // Staging of $is_sh.
-      always @(posedge clk) CPU_is_sh_a2 <= CPU_is_sh_a1;
-      always @(posedge clk) CPU_is_sh_a3 <= CPU_is_sh_a2;
-      always @(posedge clk) CPU_is_sh_a4 <= CPU_is_sh_a3;
-      always @(posedge clk) CPU_is_sh_a5 <= CPU_is_sh_a4;
 
       // Staging of $is_sll.
       always @(posedge clk) CPU_is_sll_a2 <= CPU_is_sll_a1;
@@ -616,12 +465,6 @@ wire clkP_CPU_rs2_valid_a2 ;
       always @(posedge clk) CPU_is_sub_a2 <= CPU_is_sub_a1;
       always @(posedge clk) CPU_is_sub_a3 <= CPU_is_sub_a2;
 
-      // Staging of $is_sw.
-      always @(posedge clk) CPU_is_sw_a2 <= CPU_is_sw_a1;
-      always @(posedge clk) CPU_is_sw_a3 <= CPU_is_sw_a2;
-      always @(posedge clk) CPU_is_sw_a4 <= CPU_is_sw_a3;
-      always @(posedge clk) CPU_is_sw_a5 <= CPU_is_sw_a4;
-
       // Staging of $is_xor.
       always @(posedge clk) CPU_is_xor_a2 <= CPU_is_xor_a1;
       always @(posedge clk) CPU_is_xor_a3 <= CPU_is_xor_a2;
@@ -630,8 +473,17 @@ wire clkP_CPU_rs2_valid_a2 ;
       always @(posedge clk) CPU_is_xori_a2 <= CPU_is_xori_a1;
       always @(posedge clk) CPU_is_xori_a3 <= CPU_is_xori_a2;
 
-      // Staging of $jalr_tgt_pc.
-      always @(posedge clk) CPU_jalr_tgt_pc_a3[31:0] <= CPU_jalr_tgt_pc_a2[31:0];
+      // Staging of $jal.
+      always @(posedge clk) CPU_jal_a2 <= CPU_jal_a1;
+      always @(posedge clk) CPU_jal_a3 <= CPU_jal_a2;
+
+      // Staging of $jalr.
+      always @(posedge clk) CPU_jalr_a2 <= CPU_jalr_a1;
+      always @(posedge clk) CPU_jalr_a3 <= CPU_jalr_a2;
+
+      // Staging of $lui.
+      always @(posedge clk) CPU_lui_a2 <= CPU_lui_a1;
+      always @(posedge clk) CPU_lui_a3 <= CPU_lui_a2;
 
       // Staging of $pc.
       always @(posedge clk) CPU_pc_a1[31:0] <= CPU_pc_a0[31:0];
@@ -641,22 +493,15 @@ wire clkP_CPU_rs2_valid_a2 ;
       // Staging of $rd.
       always @(posedge clkP_CPU_rd_valid_a2) CPU_rd_a2[4:0] <= w_CPU_rd_a1[4:0];
       always @(posedge clkP_CPU_rd_valid_a3) CPU_rd_a3[4:0] <= CPU_rd_a2[4:0];
-      always @(posedge clkP_CPU_rd_valid_a4) CPU_rd_a4[4:0] <= CPU_rd_a3[4:0];
-      always @(posedge clkP_CPU_rd_valid_a5) CPU_rd_a5[4:0] <= CPU_rd_a4[4:0];
 
       // Staging of $rd_valid.
       always @(posedge clk) CPU_rd_valid_a2 <= CPU_rd_valid_a1;
       always @(posedge clk) CPU_rd_valid_a3 <= CPU_rd_valid_a2;
-      always @(posedge clk) CPU_rd_valid_a4 <= CPU_rd_valid_a3;
 
       // Staging of $reset.
       always @(posedge clk) CPU_reset_a1 <= CPU_reset_a0;
       always @(posedge clk) CPU_reset_a2 <= CPU_reset_a1;
       always @(posedge clk) CPU_reset_a3 <= CPU_reset_a2;
-      always @(posedge clk) CPU_reset_a4 <= CPU_reset_a3;
-
-      // Staging of $result.
-      always @(posedge clk) CPU_result_a4[5:2] <= CPU_result_a3[5:2];
 
       // Staging of $rs1.
       always @(posedge clkP_CPU_rs1_valid_a2) CPU_rs1_a2[4:0] <= w_CPU_rs1_a1[4:0];
@@ -675,32 +520,11 @@ wire clkP_CPU_rs2_valid_a2 ;
 
       // Staging of $src2_value.
       always @(posedge clk) CPU_src2_value_a3[31:0] <= CPU_src2_value_a2[31:0];
-      always @(posedge clk) CPU_src2_value_a4[31:0] <= CPU_src2_value_a3[31:0];
-
-      // Staging of $valid.
-      always @(posedge clk) CPU_valid_a4 <= CPU_valid_a3;
-
-      // Staging of $valid_jump.
-      always @(posedge clk) CPU_valid_jump_a4 <= CPU_valid_jump_a3;
-      always @(posedge clk) CPU_valid_jump_a5 <= CPU_valid_jump_a4;
-
-      // Staging of $valid_load.
-      always @(posedge clk) CPU_valid_load_a4 <= CPU_valid_load_a3;
-      always @(posedge clk) CPU_valid_load_a5 <= CPU_valid_load_a4;
 
       // Staging of $valid_taken_br.
       always @(posedge clk) CPU_valid_taken_br_a4 <= CPU_valid_taken_br_a3;
       always @(posedge clk) CPU_valid_taken_br_a5 <= CPU_valid_taken_br_a4;
 
-
-      //
-      // Scope: /dmem[15:0]
-      //
-      generate for (dmem = 0; dmem <= 15; dmem=dmem+1) begin : L1gen_CPU_Dmem
-         // Staging of $value.
-         always @(posedge clk) CPU_Dmem_value_a5[dmem][31:0] <= CPU_Dmem_value_a4[dmem][31:0];
-
-      end endgenerate
 
       //
       // Scope: /xreg[31:0]
@@ -725,12 +549,8 @@ wire clkP_CPU_rs2_valid_a2 ;
    // Scope: |cpu
    //
 
-      clk_gate gen_clkP_CPU_dmem_rd_en_a5(clkP_CPU_dmem_rd_en_a5, clk, 1'b1, CPU_dmem_rd_en_a4, 1'b0);
       clk_gate gen_clkP_CPU_rd_valid_a2(clkP_CPU_rd_valid_a2, clk, 1'b1, CPU_rd_valid_a1, 1'b0);
       clk_gate gen_clkP_CPU_rd_valid_a3(clkP_CPU_rd_valid_a3, clk, 1'b1, CPU_rd_valid_a2, 1'b0);
-      clk_gate gen_clkP_CPU_rd_valid_a4(clkP_CPU_rd_valid_a4, clk, 1'b1, CPU_rd_valid_a3, 1'b0);
-      clk_gate gen_clkP_CPU_rd_valid_a5(clkP_CPU_rd_valid_a5, clk, 1'b1, CPU_rd_valid_a4, 1'b0);
       clk_gate gen_clkP_CPU_rs1_valid_a2(clkP_CPU_rs1_valid_a2, clk, 1'b1, CPU_rs1_valid_a1, 1'b0);
       clk_gate gen_clkP_CPU_rs2_valid_a2(clkP_CPU_rs2_valid_a2, clk, 1'b1, CPU_rs2_valid_a1, 1'b0);
-
 
