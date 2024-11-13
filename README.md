@@ -2524,7 +2524,7 @@ exit
 ![Screenshot from 2024-11-13 19-34-07](https://github.com/user-attachments/assets/4a5330cc-40be-4d18-bdd1-c77972b8f371)
 ![Screenshot from 2024-11-13 19-43-57](https://github.com/user-attachments/assets/3d4ea0e9-00aa-4ed9-9c5e-26775fd990e6)
 
-
+**2. Calculate the flop ratio.**
 ![Screenshot from 2024-11-13 19-53-41](https://github.com/user-attachments/assets/4aee2a20-be89-4ca9-88ab-e07b9493783c)
 
 
@@ -2540,6 +2540,73 @@ $$
 
 
 
+## Good floorplan vs bad floorplan and introduction to library cells
+**1. Run 'picorv32a' design floorplan using OpenLANE flow and generate necessary outputs.**
 
+```
+cd Desktop/work/tools/openlane_working_dir/openlane
+docker
+./flow.tcl -interactive
+package require openlane 0.9
+prep -design picorv32a
+run_synthesis
+run_floorplan
+```
+
+![Screenshot from 2024-11-13 23-38-00](https://github.com/user-attachments/assets/aa2f9642-5168-45ff-8d17-1a658009c4a8)
+
+
+
+**2. Calculate the die area in microns from the values in floorplan def.**
+
+![Screenshot from 2024-11-13 23-54-26](https://github.com/user-attachments/assets/0ff3cda6-41c6-4136-bc06-db5a152fc6de)
+
+
+- **Unit distance** = 1 micron
+- **Die width in unit distance** = 660685
+- **Die height in unit distance** = 671405
+
+
+$$
+\text{Distance in microns} = \frac{\text{Value in Unit Distance}}{1000}
+$$
+
+
+$$
+\text{Die width in microns} = \frac{660685}{1000} = 660.685 \ \text{microns}
+$$
+
+
+$$
+\text{Die height in microns} = \frac{671405}{1000} = 671.405 \ \text{microns}
+$$
+
+
+$$
+\text{Area of Die in microns} = 660.685 \times 671.405 = 443587.212425 \ \text{square microns}
+$$
+
+
+**3. Load generated floorplan def in magic tool and explore the floorplan.**
+```
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/13-11_18-05/results/floorplan/
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def &
+```
+
+**4. Run 'picorv32a' design congestion aware placement using OpenLANE flow and generate necessary outputs.**
+```
+run_placement
+```
+![Screenshot from 2024-11-14 00-31-39](https://github.com/user-attachments/assets/8d0b13e6-5116-4b1c-bd7f-28f9e39b3a1b)
+
+**5. Load generated placement def in magic tool and explore the placement.**
+
+```
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/13-11_18-44/results/placement/
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
+```
+
+
+## Design library cell using Magic Layout and ngspice characterization
    
 </details>
