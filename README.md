@@ -2496,3 +2496,50 @@ source /home/likith/OpenSTA/lab11/sta.tcl
 
 
 </details>
+
+
+
+
+***
+
+
+
+<details>
+  <summary>LAB 12:  Advanced Physical Design using OpenLANE</summary>
+
+## Inception of open-source EDA, OpenLANE and Sky130 PDK
+
+**1. Run 'picorv32a' design synthesis using OpenLANE flow and generate necessary outputs.**
+
+```
+cd Desktop/work/tools/openlane_working_dir/openlane
+docker
+./flow.tcl -interactive
+package require openlane 0.9
+prep -design picorv32a
+run_synthesis
+exit
+exit
+```
+![Screenshot from 2024-11-13 19-34-07](https://github.com/user-attachments/assets/4a5330cc-40be-4d18-bdd1-c77972b8f371)
+![Screenshot from 2024-11-13 19-43-57](https://github.com/user-attachments/assets/3d4ea0e9-00aa-4ed9-9c5e-26775fd990e6)
+
+
+![Screenshot from 2024-11-13 19-53-41](https://github.com/user-attachments/assets/4aee2a20-be89-4ca9-88ab-e07b9493783c)
+
+
+**Calculation of Flop Ratio and DFF % from Synthesis Statistics Report**
+
+$$
+\text{Flop Ratio} = \frac{1613}{14876} = 0.108429685
+$$
+
+$$
+\text{Percentage of DFF's} = 0.108429685 \times 100 = 10.84296854 \%
+$$
+
+
+
+
+   
+</details>
