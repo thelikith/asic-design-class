@@ -2659,6 +2659,8 @@ Screenshot of created spice file
 Edited spice file ready for ngspice simulation
 ![Screenshot from 2024-11-14 05-16-33](https://github.com/user-attachments/assets/a0ce23f9-9e2b-42f5-8b52-c43834f638df)
 
+**5. Post-layout ngspice simulations.**
+
 ```
 cd
 cd Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
@@ -2715,8 +2717,19 @@ $$
 \text{Fall Cell Delay} = \text{6.21126} - \text{6.14966} = \text{0.0616} \ \text{ns}= \text{61.6} \ \text{ps}
 $$
 
-**5. Post-layout ngspice simulations.**
 
 **6. Find problem in the DRC section of the old magic tech file for the skywater process and fix them.**
-   
+
+Link to Sky130 Periphery rules: https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html
+Commands to download and view the corrupted skywater process magic tech file and associated files to perform drc corrections
+
+```
+cd
+wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
+tar xfz drc_tests.tgz
+cd drc_tests
+ls -al
+gvim .magicrc
+magic -d XR &
+```
 </details>
