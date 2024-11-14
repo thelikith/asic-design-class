@@ -2608,5 +2608,115 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 
 
 ## Design library cell using Magic Layout and ngspice characterization
+
+**1. Clone custom inverter standard cell design from github repository**
+
+```
+cd
+cd Desktop/work/tools/openlane_working_dir/openlane
+git clone https://github.com/nickson-jose/vsdstdcelldesign
+cd vsdstdcelldesign
+cp /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech
+ls
+
+magic -T sky130A.tech sky130_lik_inv.mag &
+```
+![Screenshot from 2024-11-14 05-02-51](https://github.com/user-attachments/assets/b83caeb8-882b-4e29-8825-f5c2f1bbfc34)
+
+**2. Load the custom inverter layout in magic and explore.**
+
+![Screenshot from 2024-11-14 05-03-28](https://github.com/user-attachments/assets/976acae1-e48e-4577-b534-d817f0605f79)
+
+NMOS and PMOS identified
+![Screenshot from 2024-11-14 05-05-52](https://github.com/user-attachments/assets/55ec3264-33a4-471f-bf91-f624ef9ef916)
+![Screenshot from 2024-11-14 05-06-08](https://github.com/user-attachments/assets/b31a9ef9-a9dc-496a-b5f1-950ed258fc20)
+
+Output Y connectivity to PMOS and NMOS drain verified
+![Screenshot from 2024-11-14 05-06-24](https://github.com/user-attachments/assets/c5701d03-14a2-48f0-9ec4-6bbfaadb6f18)
+
+PMOS source connectivity to VDD (here VPWR) verified
+![Screenshot from 2024-11-14 05-07-16](https://github.com/user-attachments/assets/b42472ce-d1cd-4044-87c1-fd0d6836de63)
+
+NMOS source connectivity to VSS (here VGND) verified
+![Screenshot from 2024-11-14 05-07-33](https://github.com/user-attachments/assets/de931919-e691-42a8-b8a3-5d78760de161)
+
+
+**3. Spice extraction of inverter in magic.**
+
+Commands for spice extraction of the custom inverter layout to be used in tkcon window of magic
+```
+pwd
+extract all
+ext2spice cthresh 0 rthresh 0
+ext2spice
+```
+![Screenshot from 2024-11-14 05-09-42](https://github.com/user-attachments/assets/b6a9e127-b48e-4d65-b7c3-55706308b774)
+
+Screenshot of created spice file
+![Screenshot from 2024-11-14 05-16-09](https://github.com/user-attachments/assets/8bec3c54-d7dd-4f91-8ca0-30aeda845888)
+
+**4. Editing the spice model file for analysis through simulation.**
+Edited spice file ready for ngspice simulation
+![Screenshot from 2024-11-14 05-16-33](https://github.com/user-attachments/assets/a0ce23f9-9e2b-42f5-8b52-c43834f638df)
+
+```
+cd
+cd Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
+ngspice sky130_lik_inv.spice
+plot y vs time a
+```
+![Screenshot from 2024-11-14 05-52-21](https://github.com/user-attachments/assets/ffc4a060-325b-40c0-bb5c-d2f55e5079b5)
+![Screenshot from 2024-11-14 05-52-28](https://github.com/user-attachments/assets/47bb6add-c34f-48c0-b6aa-8c3ac00be324)
+
+- The **rise transition time** is calculated as the time it takes for the output to rise from 20% to 80% of its final value.
+- Rise Transition Time = Time taken for output to rise to 80% - Time taken for output to rise to 20%
+- **20% of output** = 660 mV
+- **80% of output** = 2.64 V
+![Screenshot from 2024-11-14 05-53-37](https://github.com/user-attachments/assets/aa084084-32bd-4e9e-8e53-12b8ee4a123e)
+![Screenshot from 2024-11-14 05-54-10](https://github.com/user-attachments/assets/0a689640-5800-4547-b83a-36d4dbb07768)
+![Screenshot from 2024-11-14 05-54-23](https://github.com/user-attachments/assets/3f7c4168-ef86-4d38-aefd-162fa0b4f8ce)
+
+Rise Transition Time = Time taken for output to rise to 80% - Time taken for output to rise to 20%
+
+$$
+\text{Rise transition time} = \text{2.24699} - \text{2.18243} = \text{0.06456} \ \text{ns} = = \text{64.56} \ \text{ps}
+$$
+
+- The **fall transition time** is calculated as the time it takes for the output to fall from 80% to 20% of its final value.
+- Rise Transition Time = Time taken for output to rise to 80% - Time taken for output to rise to 20%
+- **20% of output** = 660 mV
+- **80% of output** = 2.64 V
+![Screenshot from 2024-11-14 05-55-34](https://github.com/user-attachments/assets/afb074e6-3ae9-44d5-8542-1215330fc4b7)
+![Screenshot from 2024-11-14 05-55-59](https://github.com/user-attachments/assets/f0e3f89a-de1e-4bdf-9614-8a55cb61cab3)
+![Screenshot from 2024-11-14 05-56-14](https://github.com/user-attachments/assets/97cf21a9-0881-4f93-ab9a-703131368721)
+Rise Transition Time = Time taken for output to rise to 80% - Time taken for output to rise to 20%
+
+$$
+\text{Fall transition time} = \text{4.09558} - \text{4.05241} = \text{0.04317} \ \text{ns}= \text{43.17} \ \text{ps}
+$$
+
+- The **Rise Cell Delay** = Time taken for output to rise to 50% - Time taken for input to fall to 50%
+- **50% of 3.3V** = 1.65 V
+![Screenshot from 2024-11-14 05-57-05](https://github.com/user-attachments/assets/72e97e35-54a6-42c5-9c34-32edb84c29ff)
+![Screenshot from 2024-11-14 05-57-52](https://github.com/user-attachments/assets/1fa37e2f-f115-4d9c-9092-f6e121438c5a)
+![Screenshot from 2024-11-14 05-57-54](https://github.com/user-attachments/assets/f190f340-d011-400e-a4e2-aed853923166)
+
+$$
+\text{Rise Cell Delay} = \text{2.21126} - \text{2.14989} = \text{0.06137} \ \text{ns}= \text{61.37} \ \text{ps}
+$$
+
+
+- The **Fall Cell Delay** = Time taken for output to rise to 50% - Time taken for input to rise to 50%
+- **50% of 3.3V** = 1.65 V
+![Screenshot from 2024-11-14 05-59-15](https://github.com/user-attachments/assets/3b9f9494-7106-4dbf-a5d0-d5d0dc2b159e)
+![Screenshot from 2024-11-14 06-00-12](https://github.com/user-attachments/assets/652daf25-edb6-445d-8288-ab1c0226ed0d)
+
+$$
+\text{Fall Cell Delay} = \text{6.21126} - \text{6.14966} = \text{0.0616} \ \text{ns}= \text{61.6} \ \text{ps}
+$$
+
+**5. Post-layout ngspice simulations.**
+
+**6. Find problem in the DRC section of the old magic tech file for the skywater process and fix them.**
    
 </details>
