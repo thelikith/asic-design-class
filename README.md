@@ -2592,6 +2592,16 @@ $$
 cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/13-11_18-05/results/floorplan/
 magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def &
 ```
+![Screenshot from 2024-11-15 08-03-31](https://github.com/user-attachments/assets/2201060b-68b0-4519-a0b0-24e623608812)
+Equidistant placement of ports:
+![Screenshot from 2024-11-15 08-04-24](https://github.com/user-attachments/assets/faeec930-25f7-4aab-9bb1-d6b218f58b9b)
+Port layer as set through config.tcl:
+![Screenshot from 2024-11-15 08-05-06](https://github.com/user-attachments/assets/408d0ae2-676e-4b63-a5cb-85c743f5a9bb)
+![Screenshot from 2024-11-15 08-06-13](https://github.com/user-attachments/assets/e1646ce5-62a6-44d5-98a4-4670c9367cba)
+Diogonally equidistant Tap cells:
+![Screenshot from 2024-11-15 08-07-47](https://github.com/user-attachments/assets/e22781e4-0634-4659-b63b-b19d004654d9)
+Unplaced standard cells at the origin:
+![Screenshot from 2024-11-15 08-07-11](https://github.com/user-attachments/assets/22fbf7c4-10d0-47d3-9b0b-093249cc22f6)
 
 **4. Run 'picorv32a' design congestion aware placement using OpenLANE flow and generate necessary outputs.**
 ```
