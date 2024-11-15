@@ -3151,11 +3151,87 @@ echo $::env(CTS_CLK_BUFFER_LIST)
 
 ## Final steps for RTL2GDS using tritonRoute and openSTA
 **1. Perform generation of Power Distribution Network (PDN) and explore the PDN layout.**
+Commands to perform all necessary stages up until now:
+```
+cd Desktop/work/tools/openlane_working_dir/openlane
+docker
+
+./flow.tcl -interactive
+package require openlane 0.9
+prep -design picorv32a
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+set ::env(SYNTH_STRATEGY) "DELAY 3"
+set ::env(SYNTH_SIZING) 1
+run_synthesis
+init_floorplan
+place_io
+tap_decap_or
+run_placement
+unset ::env(LIB_CTS)
+run_cts
+gen_pdn
+```
+Screenshots of power distribution network run
+![Screenshot from 2024-11-15 07-00-36](https://github.com/user-attachments/assets/0684bf85-aecf-4c88-9c94-b1e39a107c0b)
+![Screenshot from 2024-11-15 07-01-01](https://github.com/user-attachments/assets/418b5c95-ff83-48ce-8e1c-d051a0c4e342)
+
+Commands to load PDN def in magic in another terminal
+```
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/14-11_18-51/tmp/floorplan/
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read 14-pdn.def &
+```
+![Screenshot from 2024-11-15 05-53-16](https://github.com/user-attachments/assets/ec1bd2db-8a5d-4fc2-ada4-7d2bcb9f1547)
+![Screenshot from 2024-11-15 05-54-27](https://github.com/user-attachments/assets/e6024ce8-7ff1-4bc9-84db-6f65b7a18700)
+![Screenshot from 2024-11-15 05-55-48](https://github.com/user-attachments/assets/31c232eb-7835-4be2-8f1e-9d39cf451659)
+
+
 
 **2. Perfrom detailed routing using TritonRoute**.
+Command to perform routing
+```
+echo $::env(CURRENT_DEF)
+echo $::env(ROUTING_STRATEGY)
+run_routing
+```
+![Screenshot from 2024-11-15 07-26-42](https://github.com/user-attachments/assets/7b662a51-cd3a-472e-8df5-ec6425a3e543)
+
+Commands to load routed def in magic in another terminal
+```
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/15-11_01-22/results/routing/
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.def &
+```
+Screenshots of routed def
+![Screenshot from 2024-11-15 07-23-34](https://github.com/user-attachments/assets/dad70ee8-f84a-4b31-9c05-8cc34737b639)
+![Screenshot from 2024-11-15 07-25-06](https://github.com/user-attachments/assets/9b5c038e-b4d8-4291-8197-e72fd50e8efe)
+![Screenshot from 2024-11-15 07-25-35](https://github.com/user-attachments/assets/738d5422-6e04-4412-9b2b-e858b626886d)
+
+![Screenshot from 2024-11-15 07-56-16](https://github.com/user-attachments/assets/f49b9968-2ce7-4343-81dd-2d81f4bd0407)
 
 **3. Post-Route parasitic extraction using SPEF extractor.**
-
+Commands for SPEF extraction using external tool
+```
+cd Desktop/work/tools/SPEF_EXTRACTOR
+python3 main.py /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/14-11_18-51/tmp/merged.lef /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/14-11_18-51/results/routing/picorv32a.def
+```
 **4. Post-Route OpenSTA timing analysis with the extracted parasitics of the route.**
+Commands to be run in OpenLANE flow to do OpenROAD timing analysis with integrated OpenSTA in OpenROAD
+```
+openroad
+read_lef /openLANE_flow/designs/picorv32a/runs/15-11_01-22/tmp/merged.lef
+read_def /openLANE_flow/designs/picorv32a/runs/15-11_01-22/results/routing/picorv32a.def
+write_db pico_route.db
+read_db pico_route.db
+read_verilog /openLANE_flow/designs/picorv32a/runs/15-11_01-22/results/synthesis/picorv32a.synthesis_preroute.v
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+link_design picorv32a
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+set_propagated_clock [all_clocks]
+read_spef /openLANE_flow/designs/picorv32a/runs/15-11_01-22/results/routing/picorv32a.spef
+report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
+exit
+```
+![Screenshot from 2024-11-15 07-47-12](https://github.com/user-attachments/assets/96bb69d2-a542-452e-bfa3-1257ba27dc1e)
+![image](https://github.com/user-attachments/assets/2a315fdc-cd1c-47d8-84ff-728cca089fea)
 
 </details>
