@@ -1,0 +1,40 @@
+violation type: Horizontal congestion
+	srcs: net:net80 net:net71 net:net63 net:_03042_ net:_03074_ net:net685 net:_03523_ net:_03577_ net:_03631_ net:_03707_ net:_03824_ net:_03825_ net:_03986_ net:_04047_ net:_04202_ net:_04252_ net:net512 net:core.CPU_dmem_wr_data_a4\[14\] net:net1060 net:net1072 net:net1077 net:net1080
+	comment: capacity:21 usage:22 overflow:1
+	bbox = (20.7000, 1145.4000) - (27.6000, 1152.3000) on Layer -
+violation type: Horizontal congestion
+	srcs: net:clknet_leaf_4_CLK net:net85 net:net76 net:net752 net:_03302_ net:_03459_ net:_03490_ net:_03611_ net:_03644_ net:_03721_ net:_03798_ net:_03809_ net:_03893_ net:_03967_ net:_04187_ net:_04233_ net:net190 net:core.CPU_dmem_wr_data_a4\[5\] net:net1265 net:net1414
+	comment: capacity:19 usage:20 overflow:1
+	bbox = (27.6000, 1124.7000) - (34.5000, 1131.6000) on Layer -
+violation type: Vertical congestion
+	srcs: net:RV_TO_DAC\[8\]
+	comment: capacity:0 usage:1 overflow:1
+	bbox = (1262.7000, 897.0000) - (1269.6000, 903.9000) on Layer -
+violation type: Vertical congestion
+	srcs: net:RV_TO_DAC\[8\]
+	comment: capacity:0 usage:1 overflow:1
+	bbox = (1262.7000, 903.9000) - (1269.6000, 910.8000) on Layer -
+violation type: Vertical congestion
+	srcs: net:RV_TO_DAC\[9\]
+	comment: capacity:0 usage:1 overflow:1
+	bbox = (1297.2000, 897.0000) - (1304.1000, 903.9000) on Layer -
+violation type: Vertical congestion
+	srcs: net:RV_TO_DAC\[9\]
+	comment: capacity:0 usage:1 overflow:1
+	bbox = (1297.2000, 903.9000) - (1304.1000, 910.8000) on Layer -
+violation type: Vertical congestion
+	srcs: net:RV_TO_DAC\[9\]
+	comment: capacity:0 usage:1 overflow:1
+	bbox = (1297.2000, 910.8000) - (1304.1000, 917.7000) on Layer -
+violation type: Vertical congestion
+	srcs: net:RV_TO_DAC\[9\]
+	comment: capacity:0 usage:1 overflow:1
+	bbox = (1297.2000, 917.7000) - (1304.1000, 924.6000) on Layer -
+violation type: Vertical congestion
+	srcs: net:RV_TO_DAC\[9\]
+	comment: capacity:0 usage:1 overflow:1
+	bbox = (1297.2000, 924.6000) - (1304.1000, 931.5000) on Layer -
+violation type: Vertical congestion
+	srcs: net:net7
+	comment: capacity:0 usage:1 overflow:1
+	bbox = (1317.9000, 1407.6000) - (1324.8000, 1414.5000) on Layer -
