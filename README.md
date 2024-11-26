@@ -3351,13 +3351,14 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk synth
 ![Screenshot from 2024-11-26 04-55-02](https://github.com/user-attachments/assets/02567eea-b6f8-4d2a-923d-450afb96d23d)
 **Log Files:**
 - [synth.rtlil](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/results/1_synth.rtlil)__
-![Screenshot from 2024-11-26 04-55-16](https://github.com/user-attachments/assets/64d6d270-3f30-4de1-ac7a-2d1b63888fde)
+![Screenshot from 2024-11-26 19-32-09](https://github.com/user-attachments/assets/b7d4e976-dead-4695-b0bb-df37682280b7)
 - [yosys.v](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/results/1_1_yosys.v)__
-![Screenshot from 2024-11-26 04-55-28](https://github.com/user-attachments/assets/9035f92d-1cf9-46f2-b69b-16efa84fa2dd)
+![Screenshot from 2024-11-26 19-32-25](https://github.com/user-attachments/assets/aff7889d-f481-4896-baa7-9ca623bbfeec)
 - [synth.sdc](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/results/1_synth.sdc)__
-![Screenshot from 2024-11-26 04-56-08](https://github.com/user-attachments/assets/1e227c50-9b24-4996-b740-031a970cce59)
+![Screenshot from 2024-11-26 19-32-36](https://github.com/user-attachments/assets/59f14853-5a50-4cce-a05c-416d281be543)
 - [synth_stat.txt](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/reports/synth_stat.txt)__
-![Screenshot from 2024-11-26 04-56-09](https://github.com/user-attachments/assets/47d40576-9db3-44a2-b7e5-42ee47270c68)
+![Screenshot from 2024-11-26 19-32-54](https://github.com/user-attachments/assets/ea454823-8172-4ee4-886a-a5bc2c738f82)
+
 
 
 
@@ -3378,7 +3379,8 @@ make gui_floorplan
 ![Screenshot from 2024-11-26 18-22-13](https://github.com/user-attachments/assets/a8222890-f732-46fe-b135-eb62969e72c5)
 
 - [floorplan final report](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/reports/2_floorplan_final.rpt)__
-![Screenshot from 2024-11-26 05-03-59](https://github.com/user-attachments/assets/bf7499ac-1711-4a7e-9169-5af9bdc057eb)
+![Screenshot from 2024-11-26 19-33-16](https://github.com/user-attachments/assets/06b83960-f5a6-452b-a049-6971ccf74d8f)
+
 
 
 **3. Placement**
@@ -3400,9 +3402,10 @@ make gui_place
 
 
 - [place.sdc](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/results/3_place.sdc)__
-![Screenshot from 2024-11-26 05-17-58](https://github.com/user-attachments/assets/4c4674f2-5ded-49ec-b110-a88175bd35f4)
+![Screenshot from 2024-11-26 19-33-38](https://github.com/user-attachments/assets/aaa77139-ec90-4bc0-bb87-7b202efb54a1)
 - [detailed_place.rpt](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/reports/3_detailed_place.rpt)__
-![Screenshot from 2024-11-26 05-17-59](https://github.com/user-attachments/assets/89391453-e71e-46e9-b2e2-d43d200fd586)
+![Screenshot from 2024-11-26 19-33-50](https://github.com/user-attachments/assets/894a3c28-306b-4c9a-b609-78a2440681d0)
+
 
 
 **4. CTS**
@@ -3421,9 +3424,10 @@ make gui_cts
 ![Screenshot from 2024-11-26 18-30-43](https://github.com/user-attachments/assets/061d2be1-3633-40a4-b9f6-79c73fe492aa)
 
 - [cts.sdc](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/results/4_cts.sdc)__
-![Screenshot from 2024-11-26 05-22-44](https://github.com/user-attachments/assets/e5d883cf-8cb1-4241-aab1-fae7e816171e)
+![Screenshot from 2024-11-26 19-34-04](https://github.com/user-attachments/assets/acd29424-99c2-48e6-a82b-f64681e24dcf)
 - [cts_final.rpt](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/reports/4_cts_final.rpt)__
-![Screenshot from 2024-11-26 05-26-30](https://github.com/user-attachments/assets/2bab4d81-4eb5-4bcf-9c17-a8caa265d423)
+![Screenshot from 2024-11-26 19-34-15](https://github.com/user-attachments/assets/4557fcd9-db9a-4375-9b5c-d47b04b1c7b6)
+
 
 
 **5. Routing**
