@@ -3311,6 +3311,8 @@ make
 ```
 
 ### Automated RTL2GDS Flow for VSDBabySoC:
+- Copy the directory named `vsdbabysoc` with all the required files inside the following paths `/home/likith/ORFS/OpenROAD-flow-scripts/flow/designs/sky130hd` and `/home/likith/ORFS/OpenROAD-flow-scripts/flow/designs/src`
+- Create a `config.mk` file in the `vsdbabysoc` directory 
 - __[config.mk](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/vsdbabysoc/config.mk)__
 
 ```
@@ -3354,6 +3356,9 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk synth
 ![Screenshot from 2024-11-26 04-55-28](https://github.com/user-attachments/assets/454075af-6fd8-4650-b6fa-cdc9215c3376)
 - [synth.sdc](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/results/1_synth.sdc)__
 ![Screenshot from 2024-11-26 04-56-08](https://github.com/user-attachments/assets/538e0fd2-1b88-4126-878e-eb0c0826ceab)
+- [synth_stat.txt](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/reports/synth_stat.txt)__
+![Screenshot from 2024-11-26 04-56-09](https://github.com/user-attachments/assets/7297cebe-35f9-4986-9207-baaa61f47133)
+
 
 **2. Floorplan**
 ```
