@@ -3273,6 +3273,8 @@ git clone --recursive https://github.com/The-OpenROAD-Project/OpenROAD-flow-scri
 cd OpenROAD-flow-scripts
 sudo ./etc/DependencyInstaller.sh
 sudo ./setup.sh
+
+./build_openroad.sh --local
 ```
 
 ### Verify Installation
