@@ -3351,13 +3351,14 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk synth
 ![Screenshot from 2024-11-26 04-55-02](https://github.com/user-attachments/assets/02567eea-b6f8-4d2a-923d-450afb96d23d)
 **Log Files:**
 - [synth.rtlil](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/results/1_synth.rtlil)__
-![Screenshot from 2024-11-26 04-55-16](https://github.com/user-attachments/assets/92d07079-df07-4c94-844e-f0bd3a14c144)
+![Screenshot from 2024-11-26 04-55-16](https://github.com/user-attachments/assets/64d6d270-3f30-4de1-ac7a-2d1b63888fde)
 - [yosys.v](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/results/1_1_yosys.v)__
-![Screenshot from 2024-11-26 04-55-28](https://github.com/user-attachments/assets/454075af-6fd8-4650-b6fa-cdc9215c3376)
+![Screenshot from 2024-11-26 04-55-28](https://github.com/user-attachments/assets/9035f92d-1cf9-46f2-b69b-16efa84fa2dd)
 - [synth.sdc](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/results/1_synth.sdc)__
-![Screenshot from 2024-11-26 04-56-08](https://github.com/user-attachments/assets/538e0fd2-1b88-4126-878e-eb0c0826ceab)
+![Screenshot from 2024-11-26 04-56-08](https://github.com/user-attachments/assets/1e227c50-9b24-4996-b740-031a970cce59)
 - [synth_stat.txt](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/reports/synth_stat.txt)__
-![Screenshot from 2024-11-26 04-56-09](https://github.com/user-attachments/assets/7297cebe-35f9-4986-9207-baaa61f47133)
+![Screenshot from 2024-11-26 04-56-09](https://github.com/user-attachments/assets/47d40576-9db3-44a2-b7e5-42ee47270c68)
+
 
 
 **2. Floorplan**
@@ -3375,7 +3376,8 @@ make gui_floorplan
 ![Screenshot from 2024-11-26 05-00-38](https://github.com/user-attachments/assets/6ac7645c-60db-4fa2-94c6-14bbd3b3d201)
 ![Screenshot from 2024-11-26 05-03-58](https://github.com/user-attachments/assets/e2f4948c-e5a2-4bf4-9c1a-6c67ad4b8e0a)
 - [floorplan final report](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/reports/2_floorplan_final.rpt)__
-![Screenshot from 2024-11-26 05-03-59](https://github.com/user-attachments/assets/1dd8da3b-ba52-4948-91e8-d38f72f90cf3)
+![Screenshot from 2024-11-26 05-03-59](https://github.com/user-attachments/assets/bf7499ac-1711-4a7e-9169-5af9bdc057eb)
+
 
 **3. Placement**
 
@@ -3394,9 +3396,10 @@ make gui_place
 ![Screenshot from 2024-11-26 05-17-23](https://github.com/user-attachments/assets/a4b79ae4-328c-4c55-a8f2-802359e6e32c)
 
 - [place.sdc](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/results/3_place.sdc)__
-![Screenshot from 2024-11-26 05-17-58](https://github.com/user-attachments/assets/a84e978c-4499-4c37-b140-9484684b5ea5)
+![Screenshot from 2024-11-26 05-17-58](https://github.com/user-attachments/assets/4c4674f2-5ded-49ec-b110-a88175bd35f4)
 - [detailed_place.rpt](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/reports/3_detailed_place.rpt)__
-![Screenshot from 2024-11-26 05-17-59](https://github.com/user-attachments/assets/0e28e0d4-7a5c-4eab-8142-ed58af0206b8)
+![Screenshot from 2024-11-26 05-17-59](https://github.com/user-attachments/assets/89391453-e71e-46e9-b2e2-d43d200fd586)
+
 
 **4. CTS**
 ```
@@ -3410,9 +3413,10 @@ make gui_cts
 ![Screenshot from 2024-11-26 05-21-07](https://github.com/user-attachments/assets/dc6f014c-6945-4dc7-9b91-5cbab6533ef2)
 ![Screenshot from 2024-11-26 05-22-19](https://github.com/user-attachments/assets/a956be21-2055-4969-9e3b-3be64a5a11f0)
 - [cts.sdc](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/results/4_cts.sdc)__
-![Screenshot from 2024-11-26 05-22-44](https://github.com/user-attachments/assets/feb631c0-9f3f-4dfd-983e-d00fae24ae74)
+![Screenshot from 2024-11-26 05-22-44](https://github.com/user-attachments/assets/e5d883cf-8cb1-4241-aab1-fae7e816171e)
 - [cts_final.rpt](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/reports/4_cts_final.rpt)__
-![Screenshot from 2024-11-26 05-26-30](https://github.com/user-attachments/assets/e9e9e3e1-7acd-43fd-be53-ef57fc0efe77)
+![Screenshot from 2024-11-26 05-26-30](https://github.com/user-attachments/assets/2bab4d81-4eb5-4bcf-9c17-a8caa265d423)
+
 
 **5. Routing**
 ```
