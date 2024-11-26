@@ -3245,3 +3245,176 @@ exit
 ![image](https://github.com/user-attachments/assets/2a315fdc-cd1c-47d8-84ff-728cca089fea)
 
 </details>
+
+
+
+
+***
+
+
+
+
+<details>
+  <summary>LAB 13:  OpenROAD Physical Design</summary>
+
+## Tools Installation
+### Install Klayout
+Download Klayout from [here](https://www.klayout.de/build.html)
+
+```
+cd ~/Downloads
+sudo dpkg -i klayout_0.29.8-1_amd64.deb
+```
+### Install OpenROAD
+```
+mkdir ORFS
+cd ORFS
+git clone --recursive https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts
+cd OpenROAD-flow-scripts
+sudo ./etc/DependencyInstaller.sh
+sudo ./setup.sh
+```
+
+### Verify Installation
+```
+source ./env.sh
+yosys -help
+openroad -help
+cd flow
+make
+```
+![Screenshot from 2024-11-26 01-12-39](https://github.com/user-attachments/assets/793e295b-3b76-4535-84e1-17b638c90e01)
+![Screenshot from 2024-11-26 01-13-13](https://github.com/user-attachments/assets/f984fa2c-bd2f-444e-b468-171d50a88b56)
+![Screenshot from 2024-11-26 01-19-59](https://github.com/user-attachments/assets/44ea253e-92e4-4a04-bb03-5dc962282ccf)
+
+
+### ORFS Directory Structure and File formats
+![Screenshot from 2024-11-26 01-30-11](https://github.com/user-attachments/assets/dcb64af6-6c70-4b35-b3fc-4c15d72ac172)
+```
+├── OpenROAD-flow-scripts             
+│   ├── docker           -> It has Docker based installation, run scripts and all saved here
+│   ├── docs             -> Documentation for OpenROAD or its flow scripts.  
+│   ├── flow             -> Files related to run RTL to GDS flow  
+|   ├── jenkins          -> It contains the regression test designed for each build update
+│   ├── tools            -> It contains all the required tools to run RTL to GDS flow
+│   ├── etc              -> Has the dependency installer script and other things
+│   ├── setup_env.sh     -> Its the source file to source all our OpenROAD rules to run the RTL to GDS flow
+```
+```
+├── flow           
+│   ├── design           -> It has built-in examples from RTL to GDS flow across different technology nodes
+│   ├── makefile         -> The automated flow runs through makefile setup
+│   ├── platform         -> It has different technology note libraries, lef files, GDS etc 
+|   ├── tutorials        
+│   ├── util            
+│   ├── scripts
+```
+
+### Automated RTL2GDS Flow for VSDBabySoC:
+- __[config.mk](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/vsdbabysoc/config.mk)__
+
+```
+cd
+cd /home/likith/ORFS/OpenROAD-flow-scripts
+cd flow
+make
+gvim Makefile
+```
+ - __[Makefile](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/Makefile)__
+![Screenshot from 2024-11-26 03-03-08](https://github.com/user-attachments/assets/c519338f-a701-487a-9195-4d0e4f39aef9)
+![Screenshot from 2024-11-26 04-51-59](https://github.com/user-attachments/assets/49ebf2c6-ff0f-47b8-9c1a-8e4fe3ccc9ae)
+![Screenshot from 2024-11-26 04-52-11](https://github.com/user-attachments/assets/c12d48c1-e8fd-48ec-ae1e-a7e356bcc48d)
+![Screenshot from 2024-11-26 04-52-24](https://github.com/user-attachments/assets/0048a4ff-68ab-42b2-9cb6-bbc5d1988841)
+![Screenshot from 2024-11-26 04-52-33](https://github.com/user-attachments/assets/25fb7d1b-e412-4dbb-966c-b82e65dfad68)
+![Screenshot from 2024-11-26 04-52-42](https://github.com/user-attachments/assets/320189fb-4f7e-48b8-8360-b8bcf2176120)
+![Screenshot from 2024-11-26 04-52-50](https://github.com/user-attachments/assets/a5ba3be1-6646-4742-8011-46eabb6a37de)
+![Screenshot from 2024-11-26 04-52-58](https://github.com/user-attachments/assets/14f6d8ac-a61a-4151-a771-c7232cd37ef4)
+![Screenshot from 2024-11-26 04-53-05](https://github.com/user-attachments/assets/376ce37f-46bf-412f-8351-915e7304f9dd)
+
+**1. Synthesis of vsdbabysoc**
+
+```
+cd
+cd /home/likith/ORFS/OpenROAD-flow-scripts
+source env.sh
+cd flow
+ls
+```
+![Screenshot from 2024-11-26 04-53-47](https://github.com/user-attachments/assets/661cfd71-b25d-4d9b-a7c5-244ef413d1d6)
+```
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk synth
+```
+
+![Screenshot from 2024-11-26 04-54-36](https://github.com/user-attachments/assets/89730600-1044-4064-b3e2-71ff7a9acea5)
+![Screenshot from 2024-11-26 04-55-02](https://github.com/user-attachments/assets/02567eea-b6f8-4d2a-923d-450afb96d23d)
+**Log Files:**
+- [synth.rtlil](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/results/1_synth.rtlil)__
+![Screenshot from 2024-11-26 04-55-16](https://github.com/user-attachments/assets/92d07079-df07-4c94-844e-f0bd3a14c144)
+- [yosys.v](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/results/1_1_yosys.v)__
+![Screenshot from 2024-11-26 04-55-28](https://github.com/user-attachments/assets/454075af-6fd8-4650-b6fa-cdc9215c3376)
+- [synth.sdc](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/results/1_synth.sdc)__
+![Screenshot from 2024-11-26 04-56-08](https://github.com/user-attachments/assets/538e0fd2-1b88-4126-878e-eb0c0826ceab)
+
+**2. Floorplan**
+```
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk floorplan
+```
+![Screenshot from 2024-11-26 04-56-34](https://github.com/user-attachments/assets/70ca7cc8-bc22-40cf-8e80-4a7d3b87e078)
+![Screenshot from 2024-11-26 04-56-42](https://github.com/user-attachments/assets/8444d50d-63e6-443a-9c10-b33e673f716e)
+```
+make gui_floorplan
+```
+![Screenshot from 2024-11-26 04-57-00](https://github.com/user-attachments/assets/e1ae43a6-a39e-45b1-9001-fe5547f90517)
+![Screenshot from 2024-11-26 04-57-45](https://github.com/user-attachments/assets/f4905600-7157-4930-bd91-ec6a2956fc2f)
+![Screenshot from 2024-11-26 04-58-12](https://github.com/user-attachments/assets/0251e2c8-fe70-4e98-a225-16c8c737fe23)
+![Screenshot from 2024-11-26 05-00-38](https://github.com/user-attachments/assets/6ac7645c-60db-4fa2-94c6-14bbd3b3d201)
+![Screenshot from 2024-11-26 05-03-58](https://github.com/user-attachments/assets/e2f4948c-e5a2-4bf4-9c1a-6c67ad4b8e0a)
+- [floorplan final report](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/reports/2_floorplan_final.rpt)__
+![Screenshot from 2024-11-26 05-03-59](https://github.com/user-attachments/assets/1dd8da3b-ba52-4948-91e8-d38f72f90cf3)
+
+**3. Placement**
+
+```
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk place
+```
+
+![Screenshot from 2024-11-26 05-07-35](https://github.com/user-attachments/assets/3f9c37ad-3d04-4bc3-9e1d-d00ab9d160f5)
+![Screenshot from 2024-11-26 05-08-13](https://github.com/user-attachments/assets/09406faf-e637-4625-b000-f12d75796f20)
+![Screenshot from 2024-11-26 05-09-35](https://github.com/user-attachments/assets/fa4dd285-7ffe-44a2-aca3-b0cf0c4ea796)
+```
+make gui_place
+```
+![Screenshot from 2024-11-26 05-11-02](https://github.com/user-attachments/assets/16aea891-a4be-449d-b219-7daa350be769)
+![Screenshot from 2024-11-26 05-17-13](https://github.com/user-attachments/assets/1b8af172-b21b-4bea-8c0c-6f3a0ae29823)
+![Screenshot from 2024-11-26 05-17-23](https://github.com/user-attachments/assets/a4b79ae4-328c-4c55-a8f2-802359e6e32c)
+
+- [place.sdc](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/results/3_place.sdc)__
+![Screenshot from 2024-11-26 05-17-58](https://github.com/user-attachments/assets/a84e978c-4499-4c37-b140-9484684b5ea5)
+- [detailed_place.rpt](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/reports/3_detailed_place.rpt)__
+![Screenshot from 2024-11-26 05-17-59](https://github.com/user-attachments/assets/0e28e0d4-7a5c-4eab-8142-ed58af0206b8)
+
+**4. CTS**
+```
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk cts
+```
+![Screenshot from 2024-11-26 05-19-35](https://github.com/user-attachments/assets/21b9744d-82d1-49af-ade1-8652f880b7b6)
+```
+make gui_cts
+```
+![Screenshot from 2024-11-26 05-20-36](https://github.com/user-attachments/assets/6a3da678-e3d2-479b-b20a-e5e6f2054aef)
+![Screenshot from 2024-11-26 05-21-07](https://github.com/user-attachments/assets/dc6f014c-6945-4dc7-9b91-5cbab6533ef2)
+![Screenshot from 2024-11-26 05-22-19](https://github.com/user-attachments/assets/a956be21-2055-4969-9e3b-3be64a5a11f0)
+- [cts.sdc](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/results/4_cts.sdc)__
+![Screenshot from 2024-11-26 05-22-44](https://github.com/user-attachments/assets/feb631c0-9f3f-4dfd-983e-d00fae24ae74)
+- [cts_final.rpt](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/reports/4_cts_final.rpt)__
+![Screenshot from 2024-11-26 05-26-30](https://github.com/user-attachments/assets/e9e9e3e1-7acd-43fd-be53-ef57fc0efe77)
+
+**5. Routing**
+```
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk route
+```
+![Screenshot from 2024-11-26 05-27-51](https://github.com/user-attachments/assets/76b96d16-c014-4e3c-a440-21434fdc6503)
+![Screenshot from 2024-11-26 05-34-25](https://github.com/user-attachments/assets/cc010930-b59d-4586-aeab-f31e19255259)
+
+</details>
+
