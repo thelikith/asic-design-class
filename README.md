@@ -3370,11 +3370,13 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk floorplan
 ```
 make gui_floorplan
 ```
-![Screenshot from 2024-11-26 04-57-00](https://github.com/user-attachments/assets/e1ae43a6-a39e-45b1-9001-fe5547f90517)
-![Screenshot from 2024-11-26 04-57-45](https://github.com/user-attachments/assets/f4905600-7157-4930-bd91-ec6a2956fc2f)
-![Screenshot from 2024-11-26 04-58-12](https://github.com/user-attachments/assets/0251e2c8-fe70-4e98-a225-16c8c737fe23)
-![Screenshot from 2024-11-26 05-00-38](https://github.com/user-attachments/assets/6ac7645c-60db-4fa2-94c6-14bbd3b3d201)
-![Screenshot from 2024-11-26 05-03-58](https://github.com/user-attachments/assets/e2f4948c-e5a2-4bf4-9c1a-6c67ad4b8e0a)
+![Screenshot from 2024-11-26 18-22-28](https://github.com/user-attachments/assets/ce392d1b-fa72-4144-a39e-3a938959d57c)
+![Screenshot from 2024-11-26 18-15-58](https://github.com/user-attachments/assets/5eefc9be-ace0-4190-bf53-f7204406aa0d)
+![Screenshot from 2024-11-26 18-19-24](https://github.com/user-attachments/assets/cb33c1a1-4c0e-4183-8d42-1c467426aac9)
+![Screenshot from 2024-11-26 18-19-42](https://github.com/user-attachments/assets/56271860-ec0c-4d8d-9e5f-11ee4bfd172e)
+![Screenshot from 2024-11-26 18-21-49](https://github.com/user-attachments/assets/f7bdc24d-cefd-4cf4-8e7f-f2a7e3fbb5b1)
+![Screenshot from 2024-11-26 18-22-13](https://github.com/user-attachments/assets/a8222890-f732-46fe-b135-eb62969e72c5)
+
 - [floorplan final report](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/reports/2_floorplan_final.rpt)__
 ![Screenshot from 2024-11-26 05-03-59](https://github.com/user-attachments/assets/bf7499ac-1711-4a7e-9169-5af9bdc057eb)
 
@@ -3386,14 +3388,16 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk place
 ```
 
 ![Screenshot from 2024-11-26 05-07-35](https://github.com/user-attachments/assets/3f9c37ad-3d04-4bc3-9e1d-d00ab9d160f5)
-![Screenshot from 2024-11-26 05-08-13](https://github.com/user-attachments/assets/09406faf-e637-4625-b000-f12d75796f20)
-![Screenshot from 2024-11-26 05-09-35](https://github.com/user-attachments/assets/fa4dd285-7ffe-44a2-aca3-b0cf0c4ea796)
+![Screenshot from 2024-11-26 18-25-18](https://github.com/user-attachments/assets/8d7c0e88-958a-4c07-9cf0-84d1742e05b6)
+
 ```
 make gui_place
 ```
-![Screenshot from 2024-11-26 05-11-02](https://github.com/user-attachments/assets/16aea891-a4be-449d-b219-7daa350be769)
-![Screenshot from 2024-11-26 05-17-13](https://github.com/user-attachments/assets/1b8af172-b21b-4bea-8c0c-6f3a0ae29823)
-![Screenshot from 2024-11-26 05-17-23](https://github.com/user-attachments/assets/a4b79ae4-328c-4c55-a8f2-802359e6e32c)
+![Screenshot from 2024-11-26 18-26-23](https://github.com/user-attachments/assets/21e24c22-ffda-46e9-8c1c-3b6c774eec2f)
+![Screenshot from 2024-11-26 18-26-34](https://github.com/user-attachments/assets/3ca93e71-3498-4571-99a8-05a7c0541c15)
+![Screenshot from 2024-11-26 18-26-46](https://github.com/user-attachments/assets/771614fe-edb3-4b9d-95d7-db95ec3c1d60)
+
+
 
 - [place.sdc](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/results/3_place.sdc)__
 ![Screenshot from 2024-11-26 05-17-58](https://github.com/user-attachments/assets/4c4674f2-5ded-49ec-b110-a88175bd35f4)
@@ -3405,13 +3409,17 @@ make gui_place
 ```
 make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk cts
 ```
-![Screenshot from 2024-11-26 05-19-35](https://github.com/user-attachments/assets/21b9744d-82d1-49af-ade1-8652f880b7b6)
+![Screenshot from 2024-11-26 18-27-18](https://github.com/user-attachments/assets/58e1fbb3-4e07-4943-960b-158ee23be2dc)
+![Screenshot from 2024-11-26 18-30-03](https://github.com/user-attachments/assets/33a79787-78ac-4732-8004-50fa850c8b33)
+
+
 ```
 make gui_cts
 ```
-![Screenshot from 2024-11-26 05-20-36](https://github.com/user-attachments/assets/6a3da678-e3d2-479b-b20a-e5e6f2054aef)
-![Screenshot from 2024-11-26 05-21-07](https://github.com/user-attachments/assets/dc6f014c-6945-4dc7-9b91-5cbab6533ef2)
-![Screenshot from 2024-11-26 05-22-19](https://github.com/user-attachments/assets/a956be21-2055-4969-9e3b-3be64a5a11f0)
+![Screenshot from 2024-11-26 18-30-16](https://github.com/user-attachments/assets/b9d3431f-be6c-41d8-96f6-ac9d0aded1a8)
+![Screenshot from 2024-11-26 18-30-31](https://github.com/user-attachments/assets/4166006e-3e2d-440f-aa50-f1be69cf14d6)
+![Screenshot from 2024-11-26 18-30-43](https://github.com/user-attachments/assets/061d2be1-3633-40a4-b9f6-79c73fe492aa)
+
 - [cts.sdc](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/results/4_cts.sdc)__
 ![Screenshot from 2024-11-26 05-22-44](https://github.com/user-attachments/assets/e5d883cf-8cb1-4241-aab1-fae7e816171e)
 - [cts_final.rpt](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/reports/4_cts_final.rpt)__
@@ -3422,8 +3430,9 @@ make gui_cts
 ```
 make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk route
 ```
-![Screenshot from 2024-11-26 05-27-51](https://github.com/user-attachments/assets/76b96d16-c014-4e3c-a440-21434fdc6503)
-![Screenshot from 2024-11-26 05-34-25](https://github.com/user-attachments/assets/cc010930-b59d-4586-aeab-f31e19255259)
+![Screenshot from 2024-11-26 18-31-15](https://github.com/user-attachments/assets/eba1af16-3b8d-46f0-9153-2fa873b778c8)
+![Screenshot from 2024-11-26 18-34-36](https://github.com/user-attachments/assets/d76ca034-1e3b-4946-80b6-36d8de156baa)
+
 
 </details>
 
