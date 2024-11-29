@@ -3448,7 +3448,8 @@ make gui_route
 ![Screenshot from 2024-11-29 22-58-49](https://github.com/user-attachments/assets/9a66ec7b-5f87-46e9-9f22-978a7c052ad1)
 
 - [route_final.rpt](https://github.com/thelikith/asic-design-class/blob/main/Codes/Lab%2013/reports/5_global_route.rpt)__
-![Screenshot from 2024-11-26 19-34-15](https://github.com/user-attachments/assets/4557fcd9-db9a-4375-9b5c-d47b04b1c7b6)
+![Screenshot from 2024-11-29 23-11-11](https://github.com/user-attachments/assets/0208e38b-82fe-4ef6-84af-1c84fbe4be7c)
+
 
 </details>
 
