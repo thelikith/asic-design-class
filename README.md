@@ -3443,8 +3443,7 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk route
 ```
 make gui_route
 ```
-![Screenshot from 2024-11-29 23-00-23](https://github.com/user-attachments/assets/41a77537-055d-4482-bdb0-d0e45dd65b44)
-![Screenshot from 2024-11-29 22-58-49](https://github.com/user-attachments/assets/9a66ec7b-5f87-46e9-9f22-978a7c052ad1)
+![Screenshot from 2024-11-30 00-23-59](https://github.com/user-attachments/assets/03d74c7b-f522-4825-9644-744cc51c2757)
 ![Screenshot from 2024-11-29 23-31-16](https://github.com/user-attachments/assets/1ee9a202-691d-4a03-8f66-d2d126cba6d0)
 
 
